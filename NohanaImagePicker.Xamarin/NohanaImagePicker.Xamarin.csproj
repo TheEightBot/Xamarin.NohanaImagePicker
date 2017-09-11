@@ -133,6 +133,7 @@
     <Folder Include="Extensions\" />
     <Folder Include="Photos\" />
     <Folder Include="Views\" />
+    <Folder Include="ViewControllers\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -150,7 +151,7 @@
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Common\ItemList.cs" />
+    <Compile Include="Common\IItemList.cs" />
     <Compile Include="Common\IAsset.cs" />
     <Compile Include="Common\ImageData.cs" />
     <Compile Include="Common\Size.cs" />
@@ -161,6 +162,9 @@
     <Compile Include="Photos\PhotoKitAlbumList.cs" />
     <Compile Include="Views\AlbumCell.cs" />
     <Compile Include="Views\AssetCell.cs" />
+    <Compile Include="ViewControllers\NohanaImagePickerControllerDelegate.cs" />
+    <Compile Include="Photos\PickedAssetList.cs" />
+    <Compile Include="Photos\PhotoKitAsset.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

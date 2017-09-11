@@ -8,6 +8,6 @@ namespace NohanaImagePicker.Xamarin.Common
     public struct ImageData
     {
         public UIImage Image { get; set; }
-        public Dictionary<NSObject, object> Info { get; set; }
+        public NSDictionary<NSObject, NSObject> Info { get; set; }
     }
 }
