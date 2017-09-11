@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NohanaImagePicker.Xamarin", "NohanaImagePicker.Xamarin\NohanaImagePicker.Xamarin.csproj", "{BB381049-1C26-4126-8688-D457C86F8605}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB381049-1C26-4126-8688-D457C86F8605}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{BB381049-1C26-4126-8688-D457C86F8605}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{BB381049-1C26-4126-8688-D457C86F8605}.Release|iPhone.ActiveCfg = Release|iPhone
+		{BB381049-1C26-4126-8688-D457C86F8605}.Release|iPhone.Build.0 = Release|iPhone
+		{BB381049-1C26-4126-8688-D457C86F8605}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{BB381049-1C26-4126-8688-D457C86F8605}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{BB381049-1C26-4126-8688-D457C86F8605}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{BB381049-1C26-4126-8688-D457C86F8605}.Debug|iPhone.Build.0 = Debug|iPhone
+	EndGlobalSection
+EndGlobal
