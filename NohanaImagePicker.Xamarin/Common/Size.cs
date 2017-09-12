@@ -39,9 +39,7 @@ namespace NohanaImagePicker.Xamarin.Common
         }
 
         public static CGRect ScreenRectWithoutAppBar(UIViewController viewController)
-        {
-             
-
+        { 
             var appBarHeight = Size.AppBarHeight(viewController);
             var toolbarHeight = Size.Toolbarheight(viewController);
             return new CGRect(

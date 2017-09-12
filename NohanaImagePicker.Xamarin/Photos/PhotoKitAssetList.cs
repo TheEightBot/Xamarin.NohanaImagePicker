@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Foundation;
 using NohanaImagePicker.Xamarin.ViewControllers;
 using Photos;
-using Item = NohanaImagePicker.Xamarin.Photos.PhotoKitAsset; 
+using Item = NohanaImagePicker.Xamarin.Photos.PhotoKitAsset;
 
 namespace NohanaImagePicker.Xamarin.Photos
 {
-    public class PhotoKitAssetList : NSObject, Common.IItemList
+    // TODO: ICollection needs work
+    public class PhotoKitAssetList : NSObject, Common.IItemList, ICollection<Item>
     { 
         private MediaType _mediaType;
         private PHAssetCollection _assetList;
@@ -34,7 +36,7 @@ namespace NohanaImagePicker.Xamarin.Photos
         public Item this[int index] => new Item((PHAsset)_fetchResult.ObjectAt(index));
 
 
-        public PHFetchOptions FetchOptions(MediaType mediaType)
+        public static PHFetchOptions FetchOptions(MediaType mediaType)
         {
             var options = new PHFetchOptions();
 
@@ -60,15 +62,51 @@ namespace NohanaImagePicker.Xamarin.Photos
         #endregion
 
         #region ICollection
-
-
-
+ 
         public int StartIndex { get => 0; }
 
         public int EndIndex { get => (int)_fetchResult.Count; }
- 
 
-		#endregion
+        public int Count => (int)_fetchResult.Count;
 
-	}
+        public bool IsReadOnly => false;
+
+		public void Add(Item item)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void Clear()
+		{ 
+			throw new NotImplementedException();
+		}
+
+		public bool Contains(Item item)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void CopyTo(Item[] array, int arrayIndex)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool Remove(Item item)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IEnumerator<Item> GetEnumerator()
+		{ 
+            return _fetchResult.GetEnumerator() as IEnumerator<Item>;
+		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return _fetchResult.GetEnumerator() as IEnumerator<Item>;
+		}
+
+        #endregion
+
+    }
 }

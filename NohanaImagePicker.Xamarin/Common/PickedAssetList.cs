@@ -7,6 +7,7 @@ using Item = NohanaImagePicker.Xamarin.Common.IAsset;
 
 namespace NohanaImagePicker.Xamarin.Common
 {
+    //TODO: pick drop
     public class PickedAssetList : Common.IItemList, ICollection<Item>
     {
         public PickedAssetList()
