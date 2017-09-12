@@ -163,8 +163,9 @@
     <Compile Include="Views\AlbumCell.cs" />
     <Compile Include="Views\AssetCell.cs" />
     <Compile Include="ViewControllers\NohanaImagePickerControllerDelegate.cs" />
-    <Compile Include="Photos\PickedAssetList.cs" />
     <Compile Include="Photos\PhotoKitAsset.cs" />
+    <Compile Include="Common\PickedAssetList.cs" />
+    <Compile Include="Photos\PhotoKitAssetList.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

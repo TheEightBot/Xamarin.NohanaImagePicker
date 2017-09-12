@@ -5,21 +5,20 @@ using System.Linq;
 using NohanaImagePicker.Xamarin.Common;
 using Item = NohanaImagePicker.Xamarin.Common.IAsset;
 
-namespace NohanaImagePicker.Xamarin.Photos
+namespace NohanaImagePicker.Xamarin.Common
 {
     public class PickedAssetList : Common.IItemList, ICollection<Item>
     {
         public PickedAssetList()
         {
         }
+
         List<Item> _assetList;
 
+        #region ItemList
+ 
         public string Title => "Selected Assets";
-
-        public int Count => throw new NotImplementedException();
-
-        public bool IsReadOnly => throw new NotImplementedException();
-
+ 
         public int Index(int i)
         {
             return i + 1;
@@ -36,7 +35,13 @@ namespace NohanaImagePicker.Xamarin.Photos
 
         public Item this[int index] => _assetList[index];
 
-        #region ICollection
+		#endregion
+
+		#region ICollection
+
+		public int Count => _assetList.Count;
+
+		public bool IsReadOnly => false;
  
         public void Add(Item item)
         {

@@ -13,7 +13,7 @@ namespace NohanaImagePicker.Xamarin.Common
 
         int Index(int i);
 
-        //subscript (index: Int) -> Item { get } // TODO:
+        //subscript (index: Int) -> Item { get } // note: this is ported at the class level
 	}
 }
 
