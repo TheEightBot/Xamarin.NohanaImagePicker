@@ -168,6 +168,8 @@
     <Compile Include="Photos\PhotoKitAssetList.cs" />
     <Compile Include="Views\AssetDetailCell.cs" />
     <Compile Include="Views\MomentCell.cs" />
+    <Compile Include="Views\MomentSectionHeaderView.cs" />
+    <Compile Include="Views\AlbumListEmptyIndicator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
