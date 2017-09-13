@@ -134,6 +134,7 @@
     <Folder Include="Photos\" />
     <Folder Include="Views\" />
     <Folder Include="ViewControllers\" />
+    <Folder Include="AnimationController\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -170,6 +171,11 @@
     <Compile Include="Views\MomentCell.cs" />
     <Compile Include="Views\MomentSectionHeaderView.cs" />
     <Compile Include="Views\AlbumListEmptyIndicator.cs" />
+    <Compile Include="AnimationController\SwipeInteractionController.cs" />
+    <Compile Include="Extensions\SizeExtensions.cs" />
+    <Compile Include="ViewControllers\AssetListViewController.cs" />
+    <Compile Include="ViewControllers\AlbumListViewController.cs" />
+    <Compile Include="Common\INohanaImagePickerControllerDelegate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

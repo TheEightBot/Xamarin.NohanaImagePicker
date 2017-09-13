@@ -2,6 +2,7 @@
 using UIKit;
 using Photos;
 using Foundation;
+using NohanaImagePicker.Xamarin.Common;
 
 namespace NohanaImagePicker.Xamarin.ViewControllers
 {
@@ -13,22 +14,22 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
 
     public class NohanaImagePickerController : UIViewController
     {
-        int _maximumNumberOfSelection = 21;
-        int _numberOfColumnsInPortrait = 4;
-        int _numberOfColumnsInLandscape = 7;
+        public int MaximumNumberOfSelection = 21;
+        public int NumberOfColumnsInPortrait = 4;
+        public int NumberOfColumnsInLandscape = 7;
         // open weak var delegate: NohanaImagePickerControllerDelegate?
-        bool _shouldShowMoment = true;
+        bool ShouldShowMoment = true;
 
-        bool _shouldShowEmptyAlbum = false;
+        bool ShouldShowEmptyAlbum = false;
 
-        bool _toolbarHidden = false; 
+        bool ToolbarHidden = false; 
 
         public bool CanPickAsset(Action asset)
         {
             return true;
         }
 
-		Config Conf { get; set; } = new Config();
+		public Config Conf { get; set; } = new Config();
 
         NSBundle _assetBundle;
         public NSBundle AssetBundle
@@ -48,6 +49,9 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
             }
         }
 
+        public PickedAssetList PickedAssetList;
+        public MediaType MediaType;
+        bool EnableExpandingPhotoAnimation = false;
 
 
         public NohanaImagePickerController()
@@ -70,20 +74,20 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
  
             public struct ImageGroup
             {
-                public UIImage pickedSmall { get; set; }
-    			public UIImage pickedLarge { get; set; }
-    			public UIImage droppedSmall { get; set; }
-    			public UIImage droppedLarge { get; set; }
+                public UIImage PickedSmall { get; set; }
+    			public UIImage PickedLarge { get; set; }
+    			public UIImage DroppedSmall { get; set; }
+    			public UIImage DroppedLarge { get; set; }
             }
 
 			public struct StringGroup
 			{
-				public string albumListTitle { get; set; }
-    			public string albumListMomentTitle { get; set; }
-    			public string albumListEmptyMessage { get; set; }
-    			public string albumListEmptyDescription { get; set; }
-    			public string toolbarTitleNoLimit { get; set; }
-    			public string toolbarTitleHasLimit { get; set; }
+				public string AlbumListTitle { get; set; }
+    			public string AlbumListMomentTitle { get; set; }
+    			public string AlbumListEmptyMessage { get; set; }
+    			public string AlbumListEmptyDescription { get; set; }
+    			public string ToolbarTitleNoLimit { get; set; }
+    			public string ToolbarTitleHasLimit { get; set; }
 			}
         }
     }

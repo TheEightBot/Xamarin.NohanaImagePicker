@@ -3,6 +3,7 @@ using UIKit;
 
 namespace NohanaImagePicker.Xamarin.Views
 {
+    //DONE
     public class AlbumCell : UITableViewCell
     {
         public UIImageView ThumbnailImageView { get; set; }
