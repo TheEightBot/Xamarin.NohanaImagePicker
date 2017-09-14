@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{647EBF8F-2C1D-4E6C-94DD-281DC639D242}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Xamarin.NohanaImagePicker</RootNamespace>
+    <AssemblyName>Xamarin.NohanaImagePicker</AssemblyName>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchFastDev>true</MtouchFastDev>
+    <MtouchProfiling>true</MtouchProfiling>
+    <IOSDebuggerPort>35559</IOSDebuggerPort>
+    <DeviceSpecificBuild>false</DeviceSpecificBuild>
+    <MtouchLink></MtouchLink>
+    <MtouchHttpClientHandler></MtouchHttpClientHandler>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants></DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchHttpClientHandler></MtouchHttpClientHandler>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="AnimationController\" />
+    <Folder Include="Common\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Photos\" />
+    <Folder Include="ViewControllers\" />
+    <Folder Include="Views\" />
+    <Folder Include="Resources\btn_select_l.imageset\" />
+    <Folder Include="Resources\btn_select_m.imageset\" />
+    <Folder Include="Resources\btn_selected_l.imageset\" />
+    <Folder Include="Resources\btn_selected_m.imageset\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AnimationController\AnimatableNavigationController.cs" />
+    <Compile Include="AnimationController\ContractingAnimationController.cs" />
+    <Compile Include="AnimationController\ExpandingAnimationController.cs" />
+    <Compile Include="AnimationController\SwipeInteractionController.cs" />
+    <Compile Include="Common\IActivityIndicatable.cs" />
+    <Compile Include="Common\IAsset.cs" />
+    <Compile Include="Common\IEmptyIndicatable.cs" />
+    <Compile Include="Common\IItemList.cs" />
+    <Compile Include="Common\ImageData.cs" />
+    <Compile Include="Common\INohanaImagePickerControllerDelegate.cs" />
+    <Compile Include="Common\NotificationInfo.cs" />
+    <Compile Include="Common\PickedAssetList.cs" />
+    <Compile Include="Common\Size.cs" />
+    <Compile Include="Extensions\SizeExtensions.cs" />
+    <Compile Include="Extensions\UIViewControllerExtensions.cs" />
+    <Compile Include="Photos\PhotoKitAlbumList.cs" />
+    <Compile Include="Photos\PhotoKitAsset.cs" />
+    <Compile Include="Photos\PhotoKitAssetList.cs" />
+    <Compile Include="Views\AlbumCell.cs" />
+    <Compile Include="Views\AlbumListEmptyIndicator.cs" />
+    <Compile Include="Views\AssetCell.cs" />
+    <Compile Include="Views\AssetDetailCell.cs" />
+    <Compile Include="Views\MomentCell.cs" />
+    <Compile Include="Views\MomentSectionHeaderView.cs" />
+    <Compile Include="AlbumListViewController.cs" />
+    <Compile Include="AssetDetailListViewController.cs" />
+    <Compile Include="AssetListViewController.cs" />
+    <Compile Include="MomentViewController.cs" />
+    <Compile Include="NohanaImagePickerController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btn_select_l.imageset\btn_select_l%402x.png" />
+    <BundleResource Include="Resources\btn_select_l.imageset\btn_select_l%403x.png" />
+    <BundleResource Include="Resources\btn_select_l.imageset\Contents.json" />
+    <BundleResource Include="Resources\btn_select_m.imageset\btn_select_m%402x.png" />
+    <BundleResource Include="Resources\btn_select_m.imageset\btn_select_m%403x.png" />
+    <BundleResource Include="Resources\btn_select_m.imageset\Contents.json" />
+    <BundleResource Include="Resources\btn_selected_l.imageset\btn_selected_l%402x.png" />
+    <BundleResource Include="Resources\btn_selected_l.imageset\btn_selected_l%403x.png" />
+    <BundleResource Include="Resources\btn_selected_l.imageset\Contents.json" />
+    <BundleResource Include="Resources\btn_selected_m.imageset\btn_selected_m%402x.png" />
+    <BundleResource Include="Resources\btn_selected_m.imageset\btn_selected_m%403x.png" />
+    <BundleResource Include="Resources\btn_selected_m.imageset\Contents.json" />
+    <BundleResource Include="Resources\NohanaImagePicker.strings" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="NohanaImagePicker.storyboard" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>
