@@ -139,6 +139,7 @@
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="NohanaImagePicker.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -159,7 +160,7 @@
     <Compile Include="Photos\PhotoKitAlbumList.cs" />
     <Compile Include="Views\AlbumCell.cs" />
     <Compile Include="Views\AssetCell.cs" />
-    <Compile Include="ViewControllers\NohanaImagePickerControllerDelegate.cs" />
+    <Compile Include="ViewControllers\NohanaImagePickerController.cs" />
     <Compile Include="Photos\PhotoKitAsset.cs" />
     <Compile Include="Common\PickedAssetList.cs" />
     <Compile Include="Photos\PhotoKitAssetList.cs" />

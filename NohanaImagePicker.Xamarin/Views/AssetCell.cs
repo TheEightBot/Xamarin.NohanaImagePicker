@@ -50,7 +50,7 @@ namespace NohanaImagePicker.Xamarin.Views
             this.nohanaImagePickerController = nohanaImagePickerController;
             this.PickButton.Selected = nohanaImagePickerController.PickedAssetList.IsPicked(asset);
             this.OverlayView.Hidden = !PickButton.Selected;
-            this.PickButton.Hidden = false;// !(nohanaImagePickerController.CanPickAsset(asset)); // TODO: Aj halp
+            this.PickButton.Hidden = !(nohanaImagePickerController.CanPickAsset(asset));
 
         }
     }

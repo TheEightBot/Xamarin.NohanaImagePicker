@@ -13,7 +13,7 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
         Any = 0, Photo, Video
     }
 
-    public class NohanaImagePickerController : UIViewController, INohanaImagePickerControllerDelegate
+    public class NohanaImagePickerController : UIViewController
     {
         public int MaximumNumberOfSelection = 21; // set 0 to no limit
 		public int NumberOfColumnsInPortrait = 4;
@@ -26,8 +26,8 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
         public bool ShouldShowEmptyAlbum = false;
 
         public bool ToolbarHidden = false; 
-        // todo: not sure how to convert this
-        public bool CanPickAsset(Action<IAsset> asset)
+        
+        public bool CanPickAsset(IAsset asset)
         {
             return true;
         }
@@ -41,7 +41,7 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
             {
                 if (_assetBundle == null)
                 {
-                    var bundle = new NSBundle();
+                    var bundle = NSBundle.MainBundle;
                     var path = bundle.PathForResource("NohanaImagePicker", ofType: "bundle");
                     if (path != null)
                         _assetBundle = new NSBundle(path);
@@ -96,7 +96,7 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            var storyboard = UIStoryboard.FromName("NohanaImagePicker", AssetBundle);
+            var storyboard = UIStoryboard.FromName("NohanaImagePicker", null);
             var viewControllerId = 
                 EnableExpandingPhotoAnimation
                     ? "EnableAnimationNavigationController"
@@ -147,77 +147,9 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
         public void DropAsset(IAsset asset)
         { 
             PickedAssetList.Drop(asset);
-        } 
-        // TODO: Aj, most of these methods are tagged with "optional" in the Swift version.
-        //       That said, I'm rather confused about the implementation of these methods. 
-        #region INohanaImagePickerControllerDelegate
+        }
 
-
-        public void NohanaImagePickerDidCancel(NohanaImagePickerController picker)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void NahonaImagePicker(NohanaImagePickerController picker, List<PHAsset> pickedAssts)
-		{
-			throw new NotImplementedException();
-		}
-
-		public bool NahonaImagePickerWillPick(NohanaImagePickerController picker, PHAsset asset, int pickedAssetsCount)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void NahonaImagePickerDidPick(NohanaImagePickerController picker, PHAsset asset, int pickedAssetCount)
-		{
-			throw new NotImplementedException();
-		}
-
-		public bool NahonaImagePickerWillDrop(NohanaImagePickerController picker, PHAsset asset, int pickedAssetCount)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void NahonaImagePickerDidDrop(NohanaImagePickerController picker, PHAsset asset, int pickedAssetCount)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void NahonaImagePickerDidSelect(NohanaImagePickerController picker, PHAsset asset)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void NahonaImagePickerDidSelect(NohanaImagePickerController picker, PHAssetCollection assetList)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void NohanaImagePickerDidSelectMoment(NohanaImagePickerController picker)
-		{
-			throw new NotImplementedException();
-		}
-
-		public UICollectionViewCell NohanaImagePickerList(NohanaImagePickerController picker, UICollectionViewController assetListViewController, UICollectionViewCell cell, NSIndexPath indexPath, PHAsset photoKitAsset)
-		{
-			throw new NotImplementedException();
-		}
-
-		public UICollectionViewCell NohanaImagePickerDetailList(NohanaImagePickerController picker, UICollectionViewController assetDetailListViewController, UICollectionViewCell cell, NSIndexPath indexPath, PHAsset photoKitAsset)
-		{
-			throw new NotImplementedException();
-		}
-
-		public UICollectionViewCell NohanaImagePickerDidChange(NohanaImagePickerController picker, UICollectionViewController assetDetailListViewController, NSIndexPath indexPath, PHAsset photoKitAsset)
-		{
-			throw new NotImplementedException();
-		}
-
-		#endregion
-
-
-
-		public struct Config
+        public struct Config
         {
             public ColorGroup Color { get; set; }
             public ImageGroup Image { get; set; }
