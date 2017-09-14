@@ -1,10 +1,13 @@
 ﻿using System;
+using CoreGraphics;
+
 namespace NohanaImagePicker.Xamarin.Extensions
 {
-    public class SizeExtensions
+    public static class SizeExtensions
     {
-        public SizeExtensions()
-        {
-        }
+        //public static CGRect ContractingAnimationToCellRect()
+        //{ 
+        
+        //}
     }
 }

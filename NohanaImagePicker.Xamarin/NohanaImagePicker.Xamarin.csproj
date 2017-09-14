@@ -178,6 +178,9 @@
     <Compile Include="Common\INohanaImagePickerControllerDelegate.cs" />
     <Compile Include="ViewControllers\MomentViewController.cs" />
     <Compile Include="ViewControllers\AssetDetailListViewController.cs" />
+    <Compile Include="AnimationController\AnimatableNavigationController.cs" />
+    <Compile Include="AnimationController\ExpandingAnimationController.cs" />
+    <Compile Include="AnimationController\ContractingAnimationController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -26,8 +26,8 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
         public bool ShouldShowEmptyAlbum = false;
 
         public bool ToolbarHidden = false; 
-
-        public bool CanPickAsset(Action asset)
+        // todo: not sure how to convert this
+        public bool CanPickAsset(Action<IAsset> asset)
         {
             return true;
         }
@@ -37,17 +37,15 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
         NSBundle _assetBundle;
         public NSBundle AssetBundle
         { 
-            get {
+            get 
+            {
                 if (_assetBundle == null)
                 {
                     var bundle = new NSBundle();
                     var path = bundle.PathForResource("NohanaImagePicker", ofType: "bundle");
                     if (path != null)
-                    {
                         _assetBundle = new NSBundle(path);
-                    }
-                }
-
+                } 
                 return _assetBundle;
             }
         }
@@ -77,8 +75,17 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
             MediaType = MediaType.Photo;
             PickedAssetList = new PickedAssetList();
             EnableExpandingPhotoAnimation = true;
-            this.PickedAssetList.NohanaImagePickerController = this;
+            this.PickedAssetList.NohanaImagePickerController = this; 
+        }
 
+        public NohanaImagePickerController(List<PHAssetCollectionSubtype> assetCollectionSubtypes, MediaType mediaType, bool enableExpandingPhotoAnimation) : base(nibName: null, bundle: null)
+        {
+            this.AssetCollectionSubtypes = assetCollectionSubtypes;
+            this.MediaType = mediaType;
+            this.EnableExpandingPhotoAnimation = enableExpandingPhotoAnimation;
+            this.PickedAssetList = new PickedAssetList();
+            
+            this.PickedAssetList.NohanaImagePickerController = this;
         }
 
         public NohanaImagePickerController(NSCoder aDecoder) : base(aDecoder)
@@ -101,18 +108,46 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
                 AddChildViewController(navigationController);
                 View.AddSubview(navigationController.View);
                 navigationController.DidMoveToParentViewController(this);
-
+                var types = new List<PHAssetCollectionType>
+                { 
+                    PHAssetCollectionType.SmartAlbum,
+                    PHAssetCollectionType.Album
+                };
                 var albumListViewController = navigationController.TopViewController as AlbumListViewController;
                 if (albumListViewController != null)
-                { 
+                {
                     albumListViewController
-                }
+                        .PhotoKitAlbumList =
+                            new Photos.PhotoKitAlbumList(
+                                assetCollectionTypes: types,
+                                assetCollectionSubtypes: AssetCollectionSubtypes,
+                                mediaType: MediaType,
+                                shouldShowEmptyAlbum: ShouldShowEmptyAlbum,
+                                handler: () => 
+                                {
+                                    // TODO:
+                                    InvokeOnMainThread(() =>
+                                    {
+                                        albumListViewController.IsLoading = false;
+                                        albumListViewController.TableView.ReloadData();
+                                    });
+                                });
 
-
-
+                    albumListViewController.NohanaImagePickerController = this;
+                            
+                } 
             }
-        } 
+        }
 
+        public void PickAsset(IAsset asset)
+        { 
+            PickedAssetList.Pick(asset);
+        }
+
+        public void DropAsset(IAsset asset)
+        { 
+            PickedAssetList.Drop(asset);
+        } 
 
         #region INohanaImagePickerControllerDelegate
 
@@ -172,7 +207,7 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
 			throw new NotImplementedException();
 		}
 
-		public UICollectionViewCell NohanaImagePickerDidChange(NohanaImagePickerController picker, UICollectionViewController assetDetailListViewController, UICollectionViewCell cell, NSIndexPath indexPath, PHAsset photoKitAsset)
+		public UICollectionViewCell NohanaImagePickerDidChange(NohanaImagePickerController picker, UICollectionViewController assetDetailListViewController, NSIndexPath indexPath, PHAsset photoKitAsset)
 		{
 			throw new NotImplementedException();
 		}

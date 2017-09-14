@@ -197,6 +197,8 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
             if (indexPaths.Length > 0)
             {
                 var selectedIndexPath = indexPaths[0];
+                var assetListDetailViewController = segue.DestinationViewController as AssetDetailListViewController;
+
             }
 
 

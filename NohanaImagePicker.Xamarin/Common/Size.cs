@@ -1,7 +1,11 @@
 ﻿using System;
 using CoreGraphics;
 using Foundation;
+using NohanaImagePicker.Xamarin.ViewControllers;
+using NohanaImagePicker.Xamarin.Views;
 using UIKit;
+using AVFoundation;
+using AVKit;
 
 namespace NohanaImagePicker.Xamarin.Common
 {
@@ -48,6 +52,38 @@ namespace NohanaImagePicker.Xamarin.Common
                 width: UIScreen.MainScreen.Bounds.Width,
                 height: UIScreen.MainScreen.Bounds.Height
             );
+        }
+
+        public static CGRect ExpandingAnimationFromCellRect(AssetListViewController fromVC, AssetCell fromCell)
+        {
+            var origin = new CGPoint(
+                x: fromCell.Frame.X,
+                y: fromCell.Frame.Y - fromVC.CollectionView.ContentOffset.Y
+            );
+            return new CGRect(origin, fromCell.Frame.Size); 
+        }
+
+        public static CGRect ExpandingAnimationToCellRect(UIViewController fromVC, CGSize toSize)
+        { 
+            return AVFoundation.AVUtilities.WithAspectRatio(ScreenRectWithoutAppBar(fromVC), toSize); 
+        }
+
+        public static CGRect ContractingAnimationToCellRect(AssetListViewController toVC, AssetCell toCell)
+        {
+            var origin = new CGPoint(
+                x: toCell.Frame.X,
+                y: toCell.Frame.Y - toVC.CollectionView.ContentOffset.Y
+            );
+            return new CGRect(origin, toCell.Frame.Size);
+        }
+
+        public static CGRect ContractingAnimationFromCellRect(AssetDetailListViewController fromVC, AssetDetailCell fromCell, CGSize contractingImageSize)
+        { 
+            var rect = AVFoundation.AVUtilities.WithAspectRatio(fromCell.ImageView.Frame, contractingImageSize);
+            rect.Y += Size.AppBarHeight(fromVC);
+            rect.X -= fromCell.ScrollView.ContentOffset.X;
+            rect.Y -= fromCell.ScrollView.ContentOffset.Y;
+            return rect;
         }
     }
 }
