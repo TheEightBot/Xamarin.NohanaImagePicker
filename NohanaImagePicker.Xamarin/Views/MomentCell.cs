@@ -13,7 +13,7 @@ namespace NohanaImagePicker.Xamarin.Views
         {
             base.Draw(rect);
             var lineWidth = (nfloat)1 / UIScreen.MainScreen.Scale;
-            var separatorColor = config?.Color.Separator ?? new UIColor(red: 0xbb / 0xff, green: 0xbb / 0xff, blue: 0xbb / 0xff, alpha: 1);
+            var separatorColor = Config?.Color.Separator ?? new UIColor(red: 0xbb / 0xff, green: 0xbb / 0xff, blue: 0xbb / 0xff, alpha: 1);
             separatorColor.SetFill();
             UIKit.UIGraphics.RectFill(new CGRect(x: 16, y: Frame.Size.Height - lineWidth, width: Frame.Size.Width, height: lineWidth));
 

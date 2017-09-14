@@ -130,8 +130,7 @@ namespace NohanaImagePicker.Xamarin.Common
                 );
             }
 
-            return true;
-
+            return true; 
         }
 
 		public bool Drop(IAsset asset)
