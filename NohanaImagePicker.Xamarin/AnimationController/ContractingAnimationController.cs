@@ -8,8 +8,7 @@ using UIKit;
 namespace NohanaImagePicker.Xamarin.AnimationController
 {
     public class ContractingAnimationController : NSObject, IUIViewControllerAnimatedTransitioning
-    {
-
+    { 
         AssetDetailCell FromCell;
 
         public ContractingAnimationController(AssetDetailCell fromCell)

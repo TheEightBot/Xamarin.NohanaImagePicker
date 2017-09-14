@@ -2,8 +2,7 @@
 using UIKit;
 using Foundation;
 namespace NohanaImagePicker.Xamarin.AnimationController
-{
-    // DONE
+{ 
     public class SwipeInteractionController : UIPercentDrivenInteractiveTransition
     {
         UIViewController viewController; 

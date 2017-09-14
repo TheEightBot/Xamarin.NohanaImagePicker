@@ -6,6 +6,6 @@ namespace NohanaImagePicker.Xamarin.Common
     public interface IActivityIndicatable
     {
         bool IsProgressing();
-        //void UpdateVisibilityOfActivityIndicator(UIView activityIndicator); in extensions
+        //void UpdateVisibilityOfActivityIndicator(UIView activityIndicator); // moved to extensions 
     }
 }

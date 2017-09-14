@@ -2,8 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Foundation;
 using NohanaImagePicker.Xamarin.Common;
+using NohanaImagePicker.Xamarin.Photos;
 using NohanaImagePicker.Xamarin.ViewControllers;
+using static NohanaImagePicker.Xamarin.Common.NotificationInfo;
 using Item = NohanaImagePicker.Xamarin.Common.IAsset;
 
 namespace NohanaImagePicker.Xamarin.Common
@@ -86,15 +89,84 @@ namespace NohanaImagePicker.Xamarin.Common
         #region Manage assetlist
 
         public bool Pick(IAsset asset)
-        { 
-            throw new NotImplementedException();
-            return false;
-        }
-		public bool Drop(IAsset asset)
-		{
+        {
+            if (!IsPicked(asset))
+                return false;
 
-			throw new NotImplementedException();
-			return false;
+            var assetsCountBeforePicking = this.Count;
+            if (asset is PhotoKitAsset)
+            {
+                var canPick =
+                    NohanaImagePickerController
+                        .pickerDelegate.NahonaImagePickerWillPick(NohanaImagePickerController, (asset as PhotoKitAsset).OriginalAsset, assetsCountBeforePicking);
+
+                if (!canPick) return false;
+            }
+
+            if (!(NohanaImagePickerController.MaximumNumberOfSelection == 0
+                || assetsCountBeforePicking < NohanaImagePickerController.MaximumNumberOfSelection))
+            {
+                return false;
+            }
+            _assetList.Append(asset);
+
+            var assetsCountAfterPicker = this.Count;
+            if (asset is PhotoKitAsset)
+            {
+                var originalAsset = (asset as PhotoKitAsset).OriginalAsset;
+                NohanaImagePickerController.pickerDelegate.NahonaImagePickerDidPick(NohanaImagePickerController, originalAsset, assetsCountBeforePicking);
+                var info = new NSDictionary<NSString, NSObject>();
+                info.SetValueForKey(originalAsset, (Foundation.NSString)NotificationInfo.Asset.PhotoKit.DidPickUserInfoKeyAsset);
+                info.SetValueForKey((NSNumber)assetsCountBeforePicking, (Foundation.NSString)NotificationInfo.Asset.PhotoKit.DidPickUserInfoKeyPickedAssetsCount);
+
+                NSNotificationCenter.DefaultCenter.PostNotification(
+                    NSNotification.FromName(
+                        name: NotificationInfo.Asset.PhotoKit.DidPick,
+                        obj: NohanaImagePickerController,
+
+                        userInfo: info
+                    )
+                   
+                );
+            }
+
+            return true;
+
+        }
+
+		public bool Drop(IAsset asset)
+		{ 
+            var assetsCountBeforeDropping = this.Count();
+            if (asset is PhotoKitAsset)
+            {
+                var canDrop = NohanaImagePickerController.pickerDelegate.NahonaImagePickerWillDrop(NohanaImagePickerController, (asset as PhotoKitAsset).OriginalAsset, assetsCountBeforeDropping);
+                if (!canDrop) return false;
+
+                _assetList = _assetList.Where(x => x.Identifier != asset.Identifier).ToList();
+                var assetsCountAfterDropping = this.Count();
+                if (asset is PhotoKitAsset)
+                {
+                    var originalAsset = (asset as PhotoKitAsset).OriginalAsset;
+                    if (originalAsset != null)
+                    {
+                        NohanaImagePickerController.NahonaImagePickerDidDrop(NohanaImagePickerController, originalAsset, assetsCountAfterDropping);
+
+                        var info = new NSDictionary<NSString, NSObject>();
+                        info.SetValueForKey(originalAsset, (Foundation.NSString)NotificationInfo.Asset.PhotoKit.DidDropUserInfoKeyAsset);
+                        info.SetValueForKey((NSNumber)assetsCountAfterDropping, (Foundation.NSString)NotificationInfo.Asset.PhotoKit.DidDropUserInfoKeyPickedAssetsCount);
+
+                        NSNotificationCenter.DefaultCenter.PostNotification(
+                           NSNotification.FromName(
+                               name: NotificationInfo.Asset.PhotoKit.DidPick,
+                               obj: NohanaImagePickerController,
+                               userInfo: info
+                           )
+                       );
+                    } 
+                } 
+            } 
+                
+			return true;
 		}
 
 		public bool IsPicked(IAsset asset)
@@ -102,7 +174,6 @@ namespace NohanaImagePicker.Xamarin.Common
             return _assetList.FirstOrDefault(x => x.Identifier == asset.Identifier) != null;
 		}
         #endregion
-
-
+ 
     }
 } 

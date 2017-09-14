@@ -17,8 +17,7 @@ namespace NohanaImagePicker.Xamarin.AnimationController
         public AnimatableNavigationController(NSCoder aDecoder) : base(aDecoder)
         {
             this.Delegate = this; 
-        }
-
+        } 
 
         [Export("navigationController:animationControllerForOperation:fromViewController:toViewController:")]
         public IUIViewControllerAnimatedTransitioning GetAnimationControllerForOperation(UINavigationController navigationController, UINavigationControllerOperation operation, UIViewController fromViewController, UIViewController toViewController)
@@ -50,10 +49,8 @@ namespace NohanaImagePicker.Xamarin.AnimationController
                         if (fromCell != null)
                         {
                             return new ContractingAnimationController(fromCell);
-                        }
-                    
-                    }
-
+                        } 
+                    } 
                     break;
                 default:
                     return null;
@@ -61,5 +58,25 @@ namespace NohanaImagePicker.Xamarin.AnimationController
 
             return null;
         } 
+
+        [Export("navigationController:didShowViewController:animated:")]
+        public void DidShowViewController(UINavigationController navigationController, UIViewController viewController, bool animated)
+        {
+            _swipeInteractionController.AttachToViewController(viewController);
+        }
+
+        [Export("navigationController:interactionControllerForAnimationController:")]
+        public IUIViewControllerInteractiveTransitioning GetInteractionControllerForAnimationController(UINavigationController navigationController, IUIViewControllerAnimatedTransitioning animationController)
+        {
+            if (animationController is ExpandingAnimationController)
+                return null;
+
+            if (animationController is ContractingAnimationController)
+                return null;
+
+            return _swipeInteractionController;
+        }
     }
+
+     
 }
