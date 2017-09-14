@@ -18,7 +18,8 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
 
         //	}
         //	}
-        //}  ^^^^^^ this is swift, // TODO: help convert
+        //}  ^^^^^^ this is swift, is below converted right
+        
         NSIndexPath _currentIndexPath;
         public NSIndexPath CurrentIndexPath { 
             get
@@ -27,6 +28,9 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
             }
             set 
             {
+                if (_currentIndexPath != value)
+                    DidChangeAssetDetailPage(value);
+                    
                 _currentIndexPath = value;
             }
         }
