@@ -7,5 +7,6 @@ namespace NohanaImagePicker.Xamarin.Common
     {
         int Identifier { get; } 
         void Image(CGSize targetSize, Action<ImageData> handler);
+
     }
 }
