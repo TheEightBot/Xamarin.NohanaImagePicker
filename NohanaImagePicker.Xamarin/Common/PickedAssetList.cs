@@ -137,7 +137,7 @@ namespace NohanaImagePicker.Xamarin.Common
             var assetsCountBeforeDropping = this.Count();
             if (asset is PhotoKitAsset)
             {
-                var canDrop = NohanaImagePickerController.pickerDelegate.NahonaImagePickerWillDrop(NohanaImagePickerController, (asset as PhotoKitAsset).OriginalAsset, assetsCountBeforeDropping);
+                var canDrop = NohanaImagePickerController.pickerDelegate.NohanaImagePickerWillDrop(NohanaImagePickerController, (asset as PhotoKitAsset).OriginalAsset, assetsCountBeforeDropping);
                 if (!canDrop) return false;
 
                 _assetList = _assetList.Where(x => x.Identifier != asset.Identifier).ToList();
@@ -147,7 +147,8 @@ namespace NohanaImagePicker.Xamarin.Common
                     var originalAsset = (asset as PhotoKitAsset).OriginalAsset;
                     if (originalAsset != null)
                     {
-                        NohanaImagePickerController.NahonaImagePickerDidDrop(NohanaImagePickerController, originalAsset, assetsCountAfterDropping);
+                        //TODO: uncomment after event is implemented 
+                        //NohanaImagePickerController.NahonaImagePickerDidDrop(NohanaImagePickerController, originalAsset, assetsCountAfterDropping);
 
                         var info = new NSDictionary<NSString, NSObject>();
                         info.SetValueForKey(originalAsset, (Foundation.NSString)NotificationInfo.Asset.PhotoKit.DidDropUserInfoKeyAsset);
