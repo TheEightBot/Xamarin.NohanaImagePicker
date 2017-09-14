@@ -66,7 +66,6 @@
     <Folder Include="Resources\btn_selected_m.imageset\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AnimationController\AnimatableNavigationController.cs" />
     <Compile Include="AnimationController\ContractingAnimationController.cs" />
@@ -86,17 +85,17 @@
     <Compile Include="Photos\PhotoKitAlbumList.cs" />
     <Compile Include="Photos\PhotoKitAsset.cs" />
     <Compile Include="Photos\PhotoKitAssetList.cs" />
-    <Compile Include="ViewControllers\AlbumListViewController.cs" />
-    <Compile Include="ViewControllers\AssetDetailListViewController.cs" />
-    <Compile Include="ViewControllers\AssetListViewController.cs" />
-    <Compile Include="ViewControllers\MomentViewController.cs" />
-    <Compile Include="ViewControllers\NohanaImagePickerController.cs" />
     <Compile Include="Views\AlbumCell.cs" />
     <Compile Include="Views\AlbumListEmptyIndicator.cs" />
     <Compile Include="Views\AssetCell.cs" />
     <Compile Include="Views\AssetDetailCell.cs" />
     <Compile Include="Views\MomentCell.cs" />
     <Compile Include="Views\MomentSectionHeaderView.cs" />
+    <Compile Include="AlbumListViewController.cs" />
+    <Compile Include="AssetDetailListViewController.cs" />
+    <Compile Include="AssetListViewController.cs" />
+    <Compile Include="MomentViewController.cs" />
+    <Compile Include="NohanaImagePickerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\btn_select_l.imageset\btn_select_l%402x.png" />
@@ -115,6 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="NohanaImagePicker.storyboard" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

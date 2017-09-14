@@ -1,12 +1,12 @@
 ﻿using System;
 using CoreGraphics;
 using Foundation;
-using NohanaImagePicker.Xamarin.Common;
-using NohanaImagePicker.Xamarin.Photos;
-using NohanaImagePicker.Xamarin.Views;
+using Xamarin.NohanaImagePicker.Common;
+using Xamarin.NohanaImagePicker.Photos;
+using Xamarin.NohanaImagePicker.Views;
 using UIKit;
 
-namespace NohanaImagePicker.Xamarin.ViewControllers
+namespace Xamarin.NohanaImagePicker.ViewControllers
 {
     public class MomentViewController : AssetListViewController, IActivityIndicatable
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UIKit;
 
-namespace NohanaImagePicker.Xamarin.Views
+namespace Xamarin.NohanaImagePicker.Views
 {
     //DONE
     public class AlbumCell : UITableViewCell

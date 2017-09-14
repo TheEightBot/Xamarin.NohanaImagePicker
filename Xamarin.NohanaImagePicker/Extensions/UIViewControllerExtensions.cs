@@ -1,11 +1,11 @@
 ﻿using System;
 using UIKit;
-using NohanaImagePicker.Xamarin.Common;
+using Xamarin.NohanaImagePicker.Common;
 using System.Linq;
 using Foundation;
-using NohanaImagePicker.Xamarin.ViewControllers;
+using Xamarin.NohanaImagePicker.ViewControllers;
 
-namespace NohanaImagePicker.Xamarin.Extensions
+namespace Xamarin.NohanaImagePicker.Extensions
 {
     public static class UIViewControllerExtensions
     {

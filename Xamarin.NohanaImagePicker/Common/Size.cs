@@ -1,13 +1,13 @@
 ﻿using System;
 using CoreGraphics;
 using Foundation;
-using NohanaImagePicker.Xamarin.ViewControllers;
-using NohanaImagePicker.Xamarin.Views;
+using Xamarin.NohanaImagePicker.ViewControllers;
+using Xamarin.NohanaImagePicker.Views;
 using UIKit;
 using AVFoundation;
 using AVKit;
 
-namespace NohanaImagePicker.Xamarin.Common
+namespace Xamarin.NohanaImagePicker.Common
 {
     public struct Size
     {

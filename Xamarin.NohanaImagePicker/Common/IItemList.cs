@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Foundation;
 
-namespace NohanaImagePicker.Xamarin.Common
+namespace Xamarin.NohanaImagePicker.Common
 {
     public interface IItemList
     {

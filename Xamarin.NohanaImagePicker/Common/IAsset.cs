@@ -1,7 +1,7 @@
 ﻿using System;
 using CoreGraphics;
 
-namespace NohanaImagePicker.Xamarin.Common
+namespace Xamarin.NohanaImagePicker.Common
 {
     public interface IAsset
     {

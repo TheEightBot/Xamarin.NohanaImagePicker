@@ -1,11 +1,11 @@
 ﻿using System;
 using Foundation;
-using NohanaImagePicker.Xamarin.Common;
-using NohanaImagePicker.Xamarin.ViewControllers;
-using NohanaImagePicker.Xamarin.Views;
+using Xamarin.NohanaImagePicker.Common;
+using Xamarin.NohanaImagePicker.ViewControllers;
+using Xamarin.NohanaImagePicker.Views;
 using UIKit;
 
-namespace NohanaImagePicker.Xamarin.AnimationController
+namespace Xamarin.NohanaImagePicker.AnimationController
 {
     public class ContractingAnimationController : NSObject, IUIViewControllerAnimatedTransitioning
     { 

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using UIKit; 
 using CoreGraphics;
 
-namespace NohanaImagePicker.Xamarin.Views
+namespace Xamarin.NohanaImagePicker.Views
 {
     // DONE
     public class AssetDetailCell : UICollectionViewCell, IUIScrollViewDelegate

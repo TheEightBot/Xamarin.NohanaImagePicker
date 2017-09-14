@@ -1,7 +1,7 @@
 ﻿using System;
 using UIKit;
 using Foundation;
-namespace NohanaImagePicker.Xamarin.AnimationController
+namespace Xamarin.NohanaImagePicker.AnimationController
 { 
     public class SwipeInteractionController : UIPercentDrivenInteractiveTransition
     {

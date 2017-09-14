@@ -1,7 +1,7 @@
 ﻿using System;
 using Foundation;
 
-namespace NohanaImagePicker.Xamarin.Common
+namespace Xamarin.NohanaImagePicker.Common
 {
     public struct NotificationInfo
     { 

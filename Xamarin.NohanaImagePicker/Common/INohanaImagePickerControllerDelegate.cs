@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Foundation;
-using NohanaImagePicker.Xamarin.ViewControllers;
+using Xamarin.NohanaImagePicker.ViewControllers;
 using Photos;
 using UIKit;
 
-namespace NohanaImagePicker.Xamarin.Common
+namespace Xamarin.NohanaImagePicker.Common
 {
     public interface INohanaImagePickerControllerDelegate
     {

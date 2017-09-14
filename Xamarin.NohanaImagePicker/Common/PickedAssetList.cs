@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Foundation;
-using NohanaImagePicker.Xamarin.Common;
-using NohanaImagePicker.Xamarin.Photos;
-using NohanaImagePicker.Xamarin.ViewControllers;
-using static NohanaImagePicker.Xamarin.Common.NotificationInfo;
-using Item = NohanaImagePicker.Xamarin.Common.IAsset;
+using Xamarin.NohanaImagePicker.Common;
+using Xamarin.NohanaImagePicker.Photos;
+using Xamarin.NohanaImagePicker.ViewControllers;
+using static Xamarin.NohanaImagePicker.Common.NotificationInfo;
+using Item = Xamarin.NohanaImagePicker.Common.IAsset;
 
-namespace NohanaImagePicker.Xamarin.Common
+namespace Xamarin.NohanaImagePicker.Common
 {
     //TODO: pick drop
     public class PickedAssetList : Common.IItemList, ICollection<Item>

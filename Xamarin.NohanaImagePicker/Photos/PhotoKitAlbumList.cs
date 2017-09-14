@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Foundation;
-using NohanaImagePicker.Xamarin.ViewControllers;
+using Xamarin.NohanaImagePicker.ViewControllers;
 using Photos;
-using Item = NohanaImagePicker.Xamarin.Photos.PhotoKitAssetList;
+using Item = Xamarin.NohanaImagePicker.Photos.PhotoKitAssetList;
 
-namespace NohanaImagePicker.Xamarin.Photos
+namespace Xamarin.NohanaImagePicker.Photos
 {
     // DONE
     public class PhotoKitAlbumList : NSObject, Common.IItemList, ICollection<Item>

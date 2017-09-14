@@ -1,10 +1,10 @@
 ﻿using System;
 using CoreGraphics;
 using Foundation;
-using NohanaImagePicker.Xamarin.ViewControllers;
+using Xamarin.NohanaImagePicker.ViewControllers;
 using UIKit;
 
-namespace NohanaImagePicker.Xamarin.Views
+namespace Xamarin.NohanaImagePicker.Views
 {
     // DONE
     public class AlbumListEmptyIndicator : UILabel

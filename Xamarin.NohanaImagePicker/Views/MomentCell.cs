@@ -1,8 +1,8 @@
 ﻿using System;
-using NohanaImagePicker.Xamarin.ViewControllers;
+using Xamarin.NohanaImagePicker.ViewControllers;
 using UIKit;
 using CoreGraphics;
-namespace NohanaImagePicker.Xamarin.Views
+namespace Xamarin.NohanaImagePicker.Views
 {
 	//DONE
 	public class MomentCell : AlbumCell

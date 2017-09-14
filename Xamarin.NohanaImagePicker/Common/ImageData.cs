@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Foundation;
 using UIKit;
 
-namespace NohanaImagePicker.Xamarin.Common
+namespace Xamarin.NohanaImagePicker.Common
 {
     public struct ImageData
     {

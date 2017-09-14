@@ -2,10 +2,10 @@
 using UIKit;
 using Photos;
 using Foundation;
-using NohanaImagePicker.Xamarin.Common;
+using Xamarin.NohanaImagePicker.Common;
 using System.Collections.Generic;
 
-namespace NohanaImagePicker.Xamarin.ViewControllers
+namespace Xamarin.NohanaImagePicker.ViewControllers
 {
 
     public enum MediaType

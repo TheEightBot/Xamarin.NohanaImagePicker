@@ -1,13 +1,13 @@
 ﻿using System;
-using NohanaImagePicker.Xamarin.Common;
-using NohanaImagePicker.Xamarin.Photos;
+using Xamarin.NohanaImagePicker.Common;
+using Xamarin.NohanaImagePicker.Photos;
 using UIKit;
 using Foundation;
-using NohanaImagePicker.Xamarin.Extensions;
+using Xamarin.NohanaImagePicker.Extensions;
 using CoreGraphics;
-using NohanaImagePicker.Xamarin.Views;
+using Xamarin.NohanaImagePicker.Views;
 
-namespace NohanaImagePicker.Xamarin.ViewControllers
+namespace Xamarin.NohanaImagePicker.ViewControllers
 {
     public class AlbumListViewController : UITableViewController, IEmptyIndicatable, IActivityIndicatable
     {

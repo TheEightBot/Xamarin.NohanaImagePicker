@@ -1,12 +1,12 @@
 ﻿using System;
 using CoreGraphics;
 using Foundation;
-using NohanaImagePicker.Xamarin.Photos;
-using NohanaImagePicker.Xamarin.Views;
+using Xamarin.NohanaImagePicker.Photos;
+using Xamarin.NohanaImagePicker.Views;
 using UIKit;
-using static NohanaImagePicker.Xamarin.Common.NotificationInfo;
+using static Xamarin.NohanaImagePicker.Common.NotificationInfo;
 
-namespace NohanaImagePicker.Xamarin.ViewControllers
+namespace Xamarin.NohanaImagePicker.ViewControllers
 {
     public class AssetDetailListViewController : AssetListViewController, IUICollectionViewDelegateFlowLayout, IUIScrollViewDelegate
     {

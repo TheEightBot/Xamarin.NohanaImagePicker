@@ -1,10 +1,10 @@
 ﻿using System;
-using NohanaImagePicker.Xamarin.Common;
-using NohanaImagePicker.Xamarin.ViewControllers;
+using Xamarin.NohanaImagePicker.Common;
+using Xamarin.NohanaImagePicker.ViewControllers;
 using UIKit;
-using static NohanaImagePicker.Xamarin.Common.NotificationInfo;
+using static Xamarin.NohanaImagePicker.Common.NotificationInfo;
 
-namespace NohanaImagePicker.Xamarin.Views
+namespace Xamarin.NohanaImagePicker.Views
 {  
     
 	public class AssetCell : UICollectionViewCell

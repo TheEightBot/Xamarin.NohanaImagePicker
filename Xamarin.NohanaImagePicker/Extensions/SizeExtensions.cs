@@ -1,7 +1,7 @@
 ﻿using System;
 using CoreGraphics;
 
-namespace NohanaImagePicker.Xamarin.Extensions
+namespace Xamarin.NohanaImagePicker.Extensions
 {
     public static class SizeExtensions
     {

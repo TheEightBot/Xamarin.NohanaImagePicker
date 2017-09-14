@@ -1,7 +1,7 @@
 ﻿using System;
 using UIKit;
 
-namespace NohanaImagePicker.Xamarin.Common
+namespace Xamarin.NohanaImagePicker.Common
 {
     public interface IActivityIndicatable
     {

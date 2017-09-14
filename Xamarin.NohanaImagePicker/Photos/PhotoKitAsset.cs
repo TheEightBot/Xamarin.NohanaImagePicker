@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using CoreGraphics;
 using Foundation;
-using NohanaImagePicker.Xamarin.Common;
+using Xamarin.NohanaImagePicker.Common;
 using Photos;
 
-namespace NohanaImagePicker.Xamarin.Photos
+namespace Xamarin.NohanaImagePicker.Photos
 {
     // DONE
     public class PhotoKitAsset : NSObject, IAsset

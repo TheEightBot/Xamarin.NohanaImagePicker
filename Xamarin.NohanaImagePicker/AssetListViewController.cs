@@ -1,14 +1,14 @@
 ﻿using System;
 using Foundation;
-using NohanaImagePicker.Xamarin.Photos;
+using Xamarin.NohanaImagePicker.Photos;
 using UIKit;
-using NohanaImagePicker.Xamarin.Extensions;
+using Xamarin.NohanaImagePicker.Extensions;
 using CoreGraphics;
-using NohanaImagePicker.Xamarin.Views;
+using Xamarin.NohanaImagePicker.Views;
 using Photos;
 using System.Linq;
 
-namespace NohanaImagePicker.Xamarin.ViewControllers
+namespace Xamarin.NohanaImagePicker.ViewControllers
 {
     public class AssetListViewController : UICollectionViewController, IUICollectionViewDelegateFlowLayout
     {
