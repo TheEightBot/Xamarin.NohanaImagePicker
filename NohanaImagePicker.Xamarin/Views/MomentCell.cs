@@ -4,9 +4,10 @@ using UIKit;
 using CoreGraphics;
 namespace NohanaImagePicker.Xamarin.Views
 {
-    public class MomentCell : AlbumCell
+	//DONE
+	public class MomentCell : AlbumCell
     {
-        NohanaImagePickerController.Config? config;
+        public NohanaImagePickerController.Config? Config;
 
         public override void Draw(CoreGraphics.CGRect rect)
         {

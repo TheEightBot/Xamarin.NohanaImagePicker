@@ -7,7 +7,7 @@ using CoreGraphics;
 namespace NohanaImagePicker.Xamarin.Views
 {
     // DONE
-    public class AssetDetailCell : UICollectionView, IUIScrollViewDelegate
+    public class AssetDetailCell : UICollectionViewCell, IUIScrollViewDelegate
     {
         public UIScrollView ScrollView { get; set; }
 

@@ -104,5 +104,13 @@ namespace NohanaImagePicker.Xamarin.Extensions
                 vc.SetToolbarTitle(notification.Object as NohanaImagePickerController);
             }
         }
+
+		public static void DidDropPhotoKitAsset(this UIViewController vc, NSNotification notification)
+		{
+			if (notification.Object is NohanaImagePickerController)
+			{
+				vc.SetToolbarTitle(notification.Object as NohanaImagePickerController);
+			}
+		}
     }
 }

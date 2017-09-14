@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NohanaImagePicker.Xamarin.Common;
+using NohanaImagePicker.Xamarin.ViewControllers;
 using Item = NohanaImagePicker.Xamarin.Common.IAsset;
 
 namespace NohanaImagePicker.Xamarin.Common
@@ -12,9 +13,10 @@ namespace NohanaImagePicker.Xamarin.Common
     {
         public PickedAssetList()
         {
-        }
+        } 
 
         List<Item> _assetList;
+        public NohanaImagePickerController NohanaImagePickerController;
 
         #region ItemList
  

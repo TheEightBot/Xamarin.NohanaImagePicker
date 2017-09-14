@@ -11,6 +11,7 @@ namespace NohanaImagePicker.Xamarin.Common
     {
 		//func nohanaImagePickerDidCancel(_ picker: NohanaImagePickerController) 
 		void NohanaImagePickerDidCancel(NohanaImagePickerController picker);
+
 		// func nohanaImagePicker(_ picker: NohanaImagePickerController, didFinishPickingPhotoKitAssets pickedAssts :[PHAsset])
 		void NahonaImagePicker(NohanaImagePickerController picker, List<PHAsset> pickedAssts);
 
@@ -42,7 +43,7 @@ namespace NohanaImagePicker.Xamarin.Common
         UICollectionViewCell NohanaImagePickerDetailList(NohanaImagePickerController picker, UICollectionViewController assetDetailListViewController, UICollectionViewCell cell, NSIndexPath indexPath, PHAsset photoKitAsset);
 
     	//@objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, assetDetailListViewController: UICollectionViewController, didChangeAssetDetailPage indexPath: IndexPath, photoKitAsset: PHAsset)
-        UICollectionViewCell NohanaImagePickerDidChange(NohanaImagePickerController picker, UICollectionViewController assetDetailListViewController, UICollectionViewCell cell, NSIndexPath indexPath, PHAsset photoKitAsset);
+        UICollectionViewCell NohanaImagePickerDidChange(NohanaImagePickerController picker, UICollectionViewController assetDetailListViewController, NSIndexPath indexPath, PHAsset photoKitAsset);
 
     }
 }

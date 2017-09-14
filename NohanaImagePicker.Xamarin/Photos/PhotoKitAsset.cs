@@ -17,7 +17,7 @@ namespace NohanaImagePicker.Xamarin.Photos
             this.Asset = asset;
         }
 
-        public PHAsset MyProperty 
+        public PHAsset OriginalAsset 
         { 
             get => Asset as PHAsset; 
         }

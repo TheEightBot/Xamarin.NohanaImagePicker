@@ -176,6 +176,8 @@
     <Compile Include="ViewControllers\AssetListViewController.cs" />
     <Compile Include="ViewControllers\AlbumListViewController.cs" />
     <Compile Include="Common\INohanaImagePickerControllerDelegate.cs" />
+    <Compile Include="ViewControllers\MomentViewController.cs" />
+    <Compile Include="ViewControllers\AssetDetailListViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

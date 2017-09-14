@@ -10,8 +10,8 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
     public class AssetListViewController : UICollectionViewController
     {
 
-        NohanaImagePickerController _nohanaImagePickerController;
-        PhotoKitAssetList _photoKitAssetList;
+        public NohanaImagePickerController _nohanaImagePickerController;
+        public PhotoKitAssetList _photoKitAssetList;
 
         public AssetListViewController()
         {
@@ -26,7 +26,7 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
             this.AddPickPhotoKitAssetNotificationObservers();
         }
 
-        public CGSize CellSize
+        public virtual CGSize CellSize
         {
             get
             {
@@ -84,14 +84,14 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
             }, null);
         } 
 
-        bool IsFirstAppearance = true;
+        public bool IsFirstAppearance = true;
 
-        void UpdateTitle()
+        public virtual void UpdateTitle()
         {
             Title = _photoKitAssetList.Title;
         }
 
-        void ScrollCollectionView(NSIndexPath indexPath)
+        public virtual void ScrollCollectionView(NSIndexPath indexPath)
         {
             var count = _photoKitAssetList?.Count ?? 0;
             if (count > 0)
@@ -102,7 +102,7 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
             }
         } 
 
-        void ScrollCollectionViewToInitialPosition()
+        public virtual void ScrollCollectionViewToInitialPosition()
         {
             if (IsFirstAppearance)
             {
@@ -127,6 +127,11 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
         // didSelectItemAt
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
+            if (_nohanaImagePickerController != null)
+            {  
+                
+            }
+
             base.ItemSelected(collectionView, indexPath);
         } 
 
