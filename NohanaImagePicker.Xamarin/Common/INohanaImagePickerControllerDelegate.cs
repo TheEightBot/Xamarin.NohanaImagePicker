@@ -22,7 +22,7 @@ namespace NohanaImagePicker.Xamarin.Common
 		void NahonaImagePickerDidPick(NohanaImagePickerController picker, PHAsset asset, int pickedAssetCount);
 	     
     	//@objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, willDropPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int) -> Bool
-        bool NahonaImagePickerWillDrop(NohanaImagePickerController picker, PHAsset asset, int pickedAssetCount);
+        bool NohanaImagePickerWillDrop(NohanaImagePickerController picker, PHAsset asset, int pickedAssetCount);
 
     	//@objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, didDropPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int)
         void NahonaImagePickerDidDrop(NohanaImagePickerController picker, PHAsset asset, int pickedAssetCount);

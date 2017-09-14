@@ -148,7 +148,8 @@ namespace NohanaImagePicker.Xamarin.ViewControllers
         { 
             PickedAssetList.Drop(asset);
         } 
-
+        // TODO: Aj, most of these methods are tagged with "optional" in the Swift version.
+        //       That said, I'm rather confused about the implementation of these methods. 
         #region INohanaImagePickerControllerDelegate
 
 
