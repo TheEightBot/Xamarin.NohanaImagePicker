@@ -125,8 +125,7 @@ namespace NohanaImagePicker.Xamarin.Common
                         obj: NohanaImagePickerController,
 
                         userInfo: info
-                    )
-                   
+                    ) 
                 );
             }
 

@@ -148,10 +148,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="ViewController.cs" />
-    <Compile Include="ViewController.designer.cs">
-      <DependentUpon>ViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Common\IItemList.cs" />
     <Compile Include="Common\IAsset.cs" />
     <Compile Include="Common\ImageData.cs" />
@@ -181,6 +177,21 @@
     <Compile Include="AnimationController\AnimatableNavigationController.cs" />
     <Compile Include="AnimationController\ExpandingAnimationController.cs" />
     <Compile Include="AnimationController\ContractingAnimationController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\btn_select_l.imageset\Contents.json" />
+    <BundleResource Include="Resources\btn_select_l.imageset\btn_select_l%402x.png" />
+    <BundleResource Include="Resources\btn_select_l.imageset\btn_select_l%403x.png" />
+    <BundleResource Include="Resources\btn_select_m.imageset\Contents.json" />
+    <BundleResource Include="Resources\btn_select_m.imageset\btn_select_m%402x.png" />
+    <BundleResource Include="Resources\btn_select_m.imageset\btn_select_m%403x.png" />
+    <BundleResource Include="Resources\btn_selected_l.imageset\Contents.json" />
+    <BundleResource Include="Resources\btn_selected_l.imageset\btn_selected_l%402x.png" />
+    <BundleResource Include="Resources\btn_selected_l.imageset\btn_selected_l%403x.png" />
+    <BundleResource Include="Resources\btn_selected_m.imageset\Contents.json" />
+    <BundleResource Include="Resources\btn_selected_m.imageset\btn_selected_m%402x.png" />
+    <BundleResource Include="Resources\btn_selected_m.imageset\btn_selected_m%403x.png" />
+    <BundleResource Include="Resources\NohanaImagePicker.strings" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
