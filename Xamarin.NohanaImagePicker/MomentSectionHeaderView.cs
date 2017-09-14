@@ -7,9 +7,9 @@ using UIKit;
 
 namespace Xamarin.NohanaImagePicker
 {
-	public partial class AlbumListViewController : UITableViewController
+	public partial class MomentSectionHeaderView : UICollectionReusableView
 	{
-		public AlbumListViewController (IntPtr handle) : base (handle)
+		public MomentSectionHeaderView (IntPtr handle) : base (handle)
 		{
 		}
 	}

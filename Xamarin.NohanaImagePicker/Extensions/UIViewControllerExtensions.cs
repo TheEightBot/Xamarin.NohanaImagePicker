@@ -3,7 +3,7 @@ using UIKit;
 using Xamarin.NohanaImagePicker.Common;
 using System.Linq;
 using Foundation;
-using Xamarin.NohanaImagePicker.ViewControllers;
+using Xamarin.NohanaImagePicker;
 
 namespace Xamarin.NohanaImagePicker.Extensions
 {

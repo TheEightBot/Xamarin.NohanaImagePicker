@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Foundation;
-using Xamarin.NohanaImagePicker.ViewControllers;
+using Xamarin.NohanaImagePicker;
 using Photos;
 using Item = Xamarin.NohanaImagePicker.Photos.PhotoKitAssetList;
 

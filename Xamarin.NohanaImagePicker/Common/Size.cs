@@ -1,8 +1,8 @@
 ﻿using System;
 using CoreGraphics;
 using Foundation;
-using Xamarin.NohanaImagePicker.ViewControllers;
-using Xamarin.NohanaImagePicker.Views;
+using Xamarin.NohanaImagePicker;
+using Xamarin.NohanaImagePicker;
 using UIKit;
 using AVFoundation;
 using AVKit;

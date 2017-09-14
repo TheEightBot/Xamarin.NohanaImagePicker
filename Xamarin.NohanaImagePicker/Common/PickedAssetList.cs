@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using Xamarin.NohanaImagePicker.Common;
 using Xamarin.NohanaImagePicker.Photos;
-using Xamarin.NohanaImagePicker.ViewControllers;
+using Xamarin.NohanaImagePicker;
 using static Xamarin.NohanaImagePicker.Common.NotificationInfo;
 using Item = Xamarin.NohanaImagePicker.Common.IAsset;
 
