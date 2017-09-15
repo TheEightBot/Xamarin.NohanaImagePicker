@@ -54,23 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="AnimationController\" />
     <Folder Include="Common\" />
     <Folder Include="Extensions\" />
     <Folder Include="Photos\" />
-    <Folder Include="ViewControllers\" />
-    <Folder Include="Views\" />
-    <Folder Include="Resources\btn_select_l.imageset\" />
-    <Folder Include="Resources\btn_select_m.imageset\" />
-    <Folder Include="Resources\btn_selected_l.imageset\" />
-    <Folder Include="Resources\btn_selected_m.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AnimationController\AnimatableNavigationController.cs" />
-    <Compile Include="AnimationController\ContractingAnimationController.cs" />
-    <Compile Include="AnimationController\ExpandingAnimationController.cs" />
-    <Compile Include="AnimationController\SwipeInteractionController.cs" />
     <Compile Include="Common\IActivityIndicatable.cs" />
     <Compile Include="Common\IAsset.cs" />
     <Compile Include="Common\IEmptyIndicatable.cs" />
@@ -85,32 +74,59 @@
     <Compile Include="Photos\PhotoKitAlbumList.cs" />
     <Compile Include="Photos\PhotoKitAsset.cs" />
     <Compile Include="Photos\PhotoKitAssetList.cs" />
-    <Compile Include="Views\AlbumCell.cs" />
-    <Compile Include="Views\AlbumListEmptyIndicator.cs" />
-    <Compile Include="Views\AssetCell.cs" />
-    <Compile Include="Views\AssetDetailCell.cs" />
-    <Compile Include="Views\MomentCell.cs" />
-    <Compile Include="Views\MomentSectionHeaderView.cs" />
     <Compile Include="AlbumListViewController.cs" />
-    <Compile Include="AssetDetailListViewController.cs" />
+    <Compile Include="AlbumListViewController.designer.cs">
+      <DependentUpon>AlbumListViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AlbumCell.cs" />
+    <Compile Include="AlbumCell.designer.cs">
+      <DependentUpon>AlbumCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MomentCell.cs" />
+    <Compile Include="MomentCell.designer.cs">
+      <DependentUpon>MomentCell.cs</DependentUpon>
+    </Compile>
     <Compile Include="AssetListViewController.cs" />
+    <Compile Include="AssetListViewController.designer.cs">
+      <DependentUpon>AssetListViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AssetCell.cs" />
+    <Compile Include="AssetCell.designer.cs">
+      <DependentUpon>AssetCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AssetDetailListViewController.cs" />
+    <Compile Include="AssetDetailListViewController.designer.cs">
+      <DependentUpon>AssetDetailListViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AssetDetailCell.cs" />
+    <Compile Include="AssetDetailCell.designer.cs">
+      <DependentUpon>AssetDetailCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AnimatableNavigationController.cs" />
+    <Compile Include="AnimatableNavigationController.designer.cs">
+      <DependentUpon>AnimatableNavigationController.cs</DependentUpon>
+    </Compile>
     <Compile Include="MomentViewController.cs" />
+    <Compile Include="MomentViewController.designer.cs">
+      <DependentUpon>MomentViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MomentSectionHeaderView.cs" />
+    <Compile Include="MomentSectionHeaderView.designer.cs">
+      <DependentUpon>MomentSectionHeaderView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AlbumListEmptyIndicator.cs" />
     <Compile Include="NohanaImagePickerController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\btn_select_l.imageset\btn_select_l%402x.png" />
-    <BundleResource Include="Resources\btn_select_l.imageset\btn_select_l%403x.png" />
-    <BundleResource Include="Resources\btn_select_l.imageset\Contents.json" />
-    <BundleResource Include="Resources\btn_select_m.imageset\btn_select_m%402x.png" />
-    <BundleResource Include="Resources\btn_select_m.imageset\btn_select_m%403x.png" />
-    <BundleResource Include="Resources\btn_select_m.imageset\Contents.json" />
-    <BundleResource Include="Resources\btn_selected_l.imageset\btn_selected_l%402x.png" />
-    <BundleResource Include="Resources\btn_selected_l.imageset\btn_selected_l%403x.png" />
-    <BundleResource Include="Resources\btn_selected_l.imageset\Contents.json" />
-    <BundleResource Include="Resources\btn_selected_m.imageset\btn_selected_m%402x.png" />
-    <BundleResource Include="Resources\btn_selected_m.imageset\btn_selected_m%403x.png" />
-    <BundleResource Include="Resources\btn_selected_m.imageset\Contents.json" />
     <BundleResource Include="Resources\NohanaImagePicker.strings" />
+    <BundleResource Include="Resources\btn_select_l%402x.png" />
+    <BundleResource Include="Resources\btn_select_l%403x.png" />
+    <BundleResource Include="Resources\btn_select_m%402x.png" />
+    <BundleResource Include="Resources\btn_select_m%403x.png" />
+    <BundleResource Include="Resources\btn_selected_l%402x.png" />
+    <BundleResource Include="Resources\btn_selected_l%403x.png" />
+    <BundleResource Include="Resources\btn_selected_m%402x.png" />
+    <BundleResource Include="Resources\btn_selected_m%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

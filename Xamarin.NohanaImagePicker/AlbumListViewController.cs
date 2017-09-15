@@ -5,11 +5,13 @@ using UIKit;
 using Foundation;
 using Xamarin.NohanaImagePicker.Extensions;
 using CoreGraphics;
-using Xamarin.NohanaImagePicker.Views;
+using Xamarin.NohanaImagePicker;
+using Photos;
+using System.Collections.Generic;
 
-namespace Xamarin.NohanaImagePicker.ViewControllers
+namespace Xamarin.NohanaImagePicker
 {
-    public class AlbumListViewController : UITableViewController, IEmptyIndicatable, IActivityIndicatable
+    public partial class AlbumListViewController : UITableViewController, IEmptyIndicatable, IActivityIndicatable
     {
 
 		enum AlbumListViewControllerSectionType
@@ -28,6 +30,14 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
             
         }
 
+        public AlbumListViewController(NSCoder coder) : base(coder)
+        {
+        }
+
+        protected internal AlbumListViewController(IntPtr handle) : base(handle)
+        {
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -36,7 +46,7 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
             if (nohanaImagePickerController != null)
             {
                 View.BackgroundColor = nohanaImagePickerController.Conf.Color.Background ?? UIColor.White;
-                Title = nohanaImagePickerController.Conf.Strings.AlbumListTitle ?? NSString.LocalizedFormat("albumlist.title", "NohanaImagePicker", nohanaImagePickerController, string.Empty);
+                Title = nohanaImagePickerController.Conf.Strings.AlbumListTitle ?? NSString.LocalizedFormat("Photos", "NohanaImagePicker", nohanaImagePickerController, string.Empty);
                 this.SetUpToolbarItems();
                 NavigationController.SetToolbarHidden(nohanaImagePickerController.ToolbarHidden, false); 
             }
@@ -124,7 +134,7 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
                     if (NohanaImagePickerController != null)
                     {
                         cell.Config = NohanaImagePickerController.Conf;
-                        cell.TitleLabel.Text = NohanaImagePickerController.Conf.Strings.AlbumListMomentTitle ?? NSString.LocalizedFormat("albumlist.moment.title", "NohanaImagePicker", NohanaImagePickerController.AssetBundle, string.Empty); 
+                        cell.titleLabel.Text = NohanaImagePickerController.Conf.Strings.AlbumListMomentTitle ?? NSString.LocalizedFormat("Moment", "NohanaImagePicker", NohanaImagePickerController.AssetBundle, string.Empty); 
                     }
                     return cell;
                 case AlbumListViewControllerSectionType.Albums:
@@ -132,11 +142,11 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
 					if (albumCell == null)
 						throw new Exception("failed to dequeueReusableCellWithIdentifier(\"AlbumCell\")");
                     var albumList = PhotoKitAlbumList[indexPath.Row];
-                    albumCell.TitleLabel.Text = albumList.Title;
+                    albumCell.titleLabel.Text = albumList.Title;
                     albumCell.Tag = indexPath.Row;
                     var imageSize = new CGSize(
-                        width: albumCell.ThumbnailImageView.Frame.Size.Width * UIScreen.MainScreen.Scale,
-                        height: albumCell.ThumbnailImageView.Frame.Size.Width * UIScreen.MainScreen.Scale
+                        width: albumCell.thumbnailImageView.Frame.Size.Width * UIScreen.MainScreen.Scale,
+                        height: albumCell.thumbnailImageView.Frame.Size.Width * UIScreen.MainScreen.Scale
                     );
                     var albumCount = albumList.Count;
                     if (albumCount > 0)
@@ -149,13 +159,13 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
                             InvokeOnMainThread(() =>
                             {
                                 if (albumCell.Tag == indexPath.Row)
-                                    albumCell.ThumbnailImageView.Image = imageData.Image;
+                                    albumCell.thumbnailImageView.Image = imageData.Image;
                             });
                         });
                     }
                     else
                     {
-                        albumCell.ThumbnailImageView.Image = null;
+                        albumCell.thumbnailImageView.Image = null;
                     }
                     return albumCell;
             }
@@ -180,9 +190,38 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
             { 
                 case AlbumListViewControllerSectionType.Moment:
                     var momentViewController = segue.DestinationViewController as MomentViewController;
+                    if (momentViewController == null)
+                        return;
+                        
+                    momentViewController.NohanaImagePickerController = NohanaImagePickerController;
+                    momentViewController.MomentAlbumList = new PhotoKitAlbumList(
+                        new List<PHAssetCollectionType> { PHAssetCollectionType.Moment },
+                        new List<PHAssetCollectionSubtype> { PHAssetCollectionSubtype.Any },
+                        NohanaImagePickerController.MediaType,
+                        NohanaImagePickerController.ShouldShowEmptyAlbum,
+                        () =>
+                        {
+                            InvokeOnMainThread(() =>
+                            {
+                                if (momentViewController == null)
+                                    return;
+
+                                momentViewController.IsLoading = false;
+                                momentViewController.CollectionView?.ReloadData();
+                                momentViewController.IsFirstAppearance = true;
+                                momentViewController.ScrollCollectionViewToInitialPosition();
+                            });
+                        });
                     break;
-                case AlbumListViewControllerSectionType.Albums:break;
                     
+                case AlbumListViewControllerSectionType.Albums:
+                    var assetListViewController = segue.DestinationViewController as AssetListViewController;
+                    if (assetListViewController == null)
+                        return;
+                        
+                    assetListViewController.PhotoKitAssetList = PhotoKitAlbumList[TableView.IndexPathForSelectedRow.Row];
+                    assetListViewController.NohanaImagePickerController = NohanaImagePickerController;
+                    break;
             }
 
             base.PrepareForSegue(segue, sender);

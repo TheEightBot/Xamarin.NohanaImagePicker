@@ -2,13 +2,13 @@
 using CoreGraphics;
 using Foundation;
 using Xamarin.NohanaImagePicker.Photos;
-using Xamarin.NohanaImagePicker.Views;
+using Xamarin.NohanaImagePicker;
 using UIKit;
 using static Xamarin.NohanaImagePicker.Common.NotificationInfo;
 
-namespace Xamarin.NohanaImagePicker.ViewControllers
+namespace Xamarin.NohanaImagePicker
 {
-    public class AssetDetailListViewController : AssetListViewController, IUICollectionViewDelegateFlowLayout, IUIScrollViewDelegate
+    public partial class AssetDetailListViewController : AssetListViewController, IUICollectionViewDelegateFlowLayout, IUIScrollViewDelegate
     {
         //var currentIndexPath: IndexPath = IndexPath()
         //{
@@ -35,7 +35,9 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
             }
         }
 
-        public UIButton PickButton;
+        protected internal AssetDetailListViewController(IntPtr handle) : base(handle)
+        {
+        }
 
         public override CGSize CellSize
         {
@@ -48,15 +50,17 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            if (_nohanaImagePickerController != null)
+            if (NohanaImagePickerController != null)
             {
-                var droppedImage = _nohanaImagePickerController.Conf.Image.DroppedSmall ?? UIImage.FromBundle("btn_select_m", _nohanaImagePickerController.AssetBundle, null);
-                var pickedImage = _nohanaImagePickerController.Conf.Image.DroppedSmall ?? UIImage.FromBundle("btn_selected_m", _nohanaImagePickerController.AssetBundle, null);
+                var droppedImage = NohanaImagePickerController.Conf.Image.DroppedSmall ?? UIImage.FromBundle("btn_select_m", NohanaImagePickerController.AssetBundle, null);
+                var pickedImage = NohanaImagePickerController.Conf.Image.DroppedSmall ?? UIImage.FromBundle("btn_selected_m", NohanaImagePickerController.AssetBundle, null);
 
-                PickButton.SetImage(droppedImage, new UIControlState());
-                PickButton.SetImage(pickedImage, UIControlState.Selected);
+                pickButton.SetImage(droppedImage, UIControlState.Normal);
+                pickButton.SetImage(pickedImage, UIControlState.Selected);
+                
+                pickButton.TouchUpInside -= PickButton_TouchUpInside;
+                pickButton.TouchUpInside += PickButton_TouchUpInside;
             }
-
         }
 
         public override void ViewWillTransitionToSize(CGSize toSize, IUIViewControllerTransitionCoordinator coordinator)
@@ -81,19 +85,19 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
 
         void DidChangeAssetDetailPage(NSIndexPath indexPath)
         {
-            if (_nohanaImagePickerController != null)
+            if (NohanaImagePickerController != null)
             {
-                var asset = _photoKitAssetList[(int)indexPath.Item];
-                this.PickButton.Selected = _nohanaImagePickerController.PickedAssetList.IsPicked(asset);
-                this.PickButton.Hidden = !(_nohanaImagePickerController.CanPickAsset(asset));
-                _nohanaImagePickerController.pickerDelegate.NohanaImagePickerDidChange(_nohanaImagePickerController, this, indexPath, asset.OriginalAsset);
+                var asset = PhotoKitAssetList[(int)indexPath.Item];
+                this.pickButton.Selected = NohanaImagePickerController.PickedAssetList.IsPicked(asset);
+                this.pickButton.Hidden = !(NohanaImagePickerController.CanPickAsset(asset));
+                NohanaImagePickerController.pickerDelegate?.NohanaImagePickerDidChange(NohanaImagePickerController, this, indexPath, asset.OriginalAsset);
 
             }
         }
 
         public override void ScrollCollectionView(NSIndexPath indexPath)
         {
-            var count = _photoKitAssetList.Count;
+            var count = PhotoKitAssetList.Count;
             if (count > 0)
             {
                 InvokeOnMainThread(() =>
@@ -114,22 +118,22 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
         }
 
         #region IBAction
-
-        public void DidPushPickButton(UIButton sender)
+        
+        public void DidPushPickButton()
         {
-            var asset = _photoKitAssetList[CurrentIndexPath.Row];
-            if (PickButton.Selected)
+            var asset = PhotoKitAssetList[CurrentIndexPath.Row];
+            if (pickButton.Selected)
             {
-                if (_nohanaImagePickerController.PickedAssetList.Drop(asset))
+                if (NohanaImagePickerController.PickedAssetList.Drop(asset))
                 {
-                    PickButton.Selected = false;
+                    pickButton.Selected = false;
                 }
             }
             else
             {
-                if (_nohanaImagePickerController.PickedAssetList.Drop(asset))
+                if (NohanaImagePickerController.PickedAssetList.Pick(asset))
                 {
-                    PickButton.Selected = true;
+                    pickButton.Selected = true;
                 }
             }
         }
@@ -140,20 +144,20 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
 
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            if (_nohanaImagePickerController == null)
+            if (NohanaImagePickerController == null)
                 throw new Exception("failed to dequeueReusableCellWithIdentifier(\"AssetDetailCell\")");
 
             var cell = collectionView.DequeueReusableCell("AssetDetailCell", indexPath) as AssetDetailCell;
             if (cell != null)
             {
-                cell.ScrollView.ZoomScale = 1;
+                cell.scrollView.ZoomScale = 1;
                 cell.Tag = indexPath.Item;
 
                 var imageSize = new CGSize(
                     width: CellSize.Width * UIScreen.MainScreen.Scale,
                     height: CellSize.Width * UIScreen.MainScreen.Scale
                 );
-                var asset = _photoKitAssetList[(int)indexPath.Item];
+                var asset = PhotoKitAssetList[(int)indexPath.Item];
                 cell.Tag = indexPath.Item;
                 // TODO: aj
                 asset.Image(imageSize, imageData =>
@@ -162,14 +166,14 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
                     {
                         if (cell.Tag == indexPath.Item)
                         {
-                            cell.ImageView.Image = imageData.Image;
-                            cell.ImageViewHeightContraint.Constant = this.CellSize.Height;
-                            cell.ImageViewWidthConstraint.Constant = this.CellSize.Width;
+                            cell.imageView.Image = imageData.Image;
+                            cell.imageViewHeightConstraint.Constant = this.CellSize.Height;
+                            cell.imageViewWidthConstraint.Constant = this.CellSize.Width;
                         }
                     });
                 });
 
-                return (_nohanaImagePickerController.pickerDelegate.NohanaImagePickerList(_nohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
+                return (NohanaImagePickerController.pickerDelegate?.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
             }
 
             return base.GetCell(collectionView, indexPath);
@@ -210,5 +214,10 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
         }
 
 		#endregion
+        
+        void PickButton_TouchUpInside(object sender, EventArgs e)
+        {
+            DidPushPickButton();
+        }
 	}
 }

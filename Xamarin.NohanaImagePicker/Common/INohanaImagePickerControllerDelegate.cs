@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Foundation;
-using Xamarin.NohanaImagePicker.ViewControllers;
+using Xamarin.NohanaImagePicker;
 using Photos;
 using UIKit;
 

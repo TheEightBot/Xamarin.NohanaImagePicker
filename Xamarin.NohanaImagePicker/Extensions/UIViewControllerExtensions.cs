@@ -3,7 +3,7 @@ using UIKit;
 using Xamarin.NohanaImagePicker.Common;
 using System.Linq;
 using Foundation;
-using Xamarin.NohanaImagePicker.ViewControllers;
+using Xamarin.NohanaImagePicker;
 
 namespace Xamarin.NohanaImagePicker.Extensions
 {
@@ -59,31 +59,27 @@ namespace Xamarin.NohanaImagePicker.Extensions
 
         public static void SetToolbarTitle(this UIViewController vc, NohanaImagePickerController nohanaImagePickerController)
         {
-            var count = vc.ToolbarItems.Count();
+            var count = vc.ToolbarItems.Length;
             if (count >= 2)
             {
                 if (vc.ToolbarItems[1] != null)
                 {
-                    UIBarButtonItem infoButton = vc.ToolbarItems[1]; 
+                    UIBarButtonItem infoButton = vc.ToolbarItems[1];
+                    infoButton.TintColor = UIColor.Black;
                     if (nohanaImagePickerController.MaximumNumberOfSelection == 0)
                     {
                         var title = NSString.LocalizedFormat(
-                            nohanaImagePickerController.Conf.Strings.ToolbarTitleNoLimit ?? NSString.LocalizedFormat("toolbar.title.nolimit", 
-                             "NohanaImagePicker", 
-                             nohanaImagePickerController.AssetBundle, 
-                             string.Empty), 
-                             nohanaImagePickerController.PickedAssetList.Count);
+                            (nohanaImagePickerController.Conf.Strings.ToolbarTitleNoLimit ?? NSString.LocalizedFormat($"Selected Items: "))
+                                + $"{nohanaImagePickerController.PickedAssetList?.Count ?? 0}");
+                                
                         infoButton.Title = title;
                     }
                     else
                     {
                         var title = NSString.LocalizedFormat(
-                            nohanaImagePickerController.Conf.Strings.ToolbarTitleHasLimit ?? NSString.LocalizedFormat("toolbar.title.nolimit", 
-                            "NohanaImagePicker", 
-                            nohanaImagePickerController.AssetBundle, 
-                            string.Empty,
-                            nohanaImagePickerController.PickedAssetList.Count()),
-                            nohanaImagePickerController.MaximumNumberOfSelection);
+                            (nohanaImagePickerController.Conf.Strings.ToolbarTitleHasLimit ?? NSString.LocalizedFormat($"Selected Items: "))
+                                + $"{nohanaImagePickerController.PickedAssetList?.Count ?? 0} / {nohanaImagePickerController.MaximumNumberOfSelection}");
+                            
 						infoButton.Title = title;
                     }
                 }
@@ -93,24 +89,27 @@ namespace Xamarin.NohanaImagePicker.Extensions
 
         public static void AddPickPhotoKitAssetNotificationObservers(this UIViewController vc)
         { 
-            NSNotificationCenter.DefaultCenter.AddObserver(vc, new ObjCRuntime.Selector("DidPickPhotoKitAsset:"), NotificationInfo.Asset.PhotoKit.DidPick, null);
-            NSNotificationCenter.DefaultCenter.AddObserver(vc, new ObjCRuntime.Selector("DidDropPhotoKitAsset:"), NotificationInfo.Asset.PhotoKit.DidDrop, null);
+            NSNotificationCenter.DefaultCenter.AddObserver(NotificationInfo.Asset.PhotoKit.DidPick, (notification) => DidPickPhotoKitAsset(vc, notification));
+            NSNotificationCenter.DefaultCenter.AddObserver(NotificationInfo.Asset.PhotoKit.DidDrop, (notification) => DidDropPhotoKitAsset(vc, notification));
         }
 
-        public static void DidPickPhotoKitAsset(this UIViewController vc, NSNotification notification)
+        public static void DidPickPhotoKitAsset(UIViewController vc, NSNotification notification)
         {
-            if (notification.Object is NohanaImagePickerController)
-            {
-                vc.SetToolbarTitle(notification.Object as NohanaImagePickerController);
-            }
+            SetToolbarTitleFromNotification(vc, notification);
         }
 
-		public static void DidDropPhotoKitAsset(this UIViewController vc, NSNotification notification)
+		public static void DidDropPhotoKitAsset(UIViewController vc, NSNotification notification)
 		{
-			if (notification.Object is NohanaImagePickerController)
-			{
-				vc.SetToolbarTitle(notification.Object as NohanaImagePickerController);
-			}
+            SetToolbarTitleFromNotification(vc, notification);
 		}
+
+        static void SetToolbarTitleFromNotification(UIViewController vc, NSNotification notification)
+        {
+            var nohanaImagePicker = notification.Object as NohanaImagePickerController;
+            if (nohanaImagePicker == null)
+                return;
+                
+            vc.SetToolbarTitle(nohanaImagePicker);
+        }
     }
 }

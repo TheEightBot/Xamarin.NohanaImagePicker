@@ -1,29 +1,33 @@
-﻿using System;
+using System;
 using Foundation;
 using Xamarin.NohanaImagePicker.Photos;
 using UIKit;
 using Xamarin.NohanaImagePicker.Extensions;
 using CoreGraphics;
-using Xamarin.NohanaImagePicker.Views;
+using Xamarin.NohanaImagePicker;
 using Photos;
 using System.Linq;
 
-namespace Xamarin.NohanaImagePicker.ViewControllers
+namespace Xamarin.NohanaImagePicker
 {
-    public class AssetListViewController : UICollectionViewController, IUICollectionViewDelegateFlowLayout
+    public partial class AssetListViewController : UICollectionViewController, IUICollectionViewDelegateFlowLayout
     {
 
-        public NohanaImagePickerController _nohanaImagePickerController;
-        public PhotoKitAssetList _photoKitAssetList;
+        public NohanaImagePickerController NohanaImagePickerController;
+        public PhotoKitAssetList PhotoKitAssetList;
 
         public AssetListViewController()
+        {
+        }
+
+        protected internal AssetListViewController(IntPtr handle) : base(handle)
         {
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            View.BackgroundColor = _nohanaImagePickerController?.Conf.Color.Background ?? UIColor.White;
+            View.BackgroundColor = NohanaImagePickerController?.Conf.Color.Background ?? UIColor.White;
             UpdateTitle();
             this.SetUpToolbarItems();
             this.AddPickPhotoKitAssetNotificationObservers();
@@ -33,14 +37,14 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
         {
             get
             {
-                if (_nohanaImagePickerController == null)
+                if (NohanaImagePickerController == null)
                 {
                     return CGSize.Empty;
                 }
-                var numberOfColumns = _nohanaImagePickerController.NumberOfColumnsInLandscape;
+                var numberOfColumns = NohanaImagePickerController.NumberOfColumnsInLandscape;
                 if (UIInterfaceOrientation.Portrait.IsPortrait())
                 {
-                    numberOfColumns = _nohanaImagePickerController.NumberOfColumnsInPortrait;
+                    numberOfColumns = NohanaImagePickerController.NumberOfColumnsInPortrait;
                 }
                 var cellMargin = (nfloat)2;
                 var cellWidth = (View.Frame.Width - cellMargin * ((nfloat)numberOfColumns) - 1) / (nfloat)numberOfColumns;
@@ -57,9 +61,9 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
         {
             base.ViewWillAppear(animated);
 
-            if (_nohanaImagePickerController != null)
+            if (NohanaImagePickerController != null)
             {
-                this.SetToolbarTitle(_nohanaImagePickerController);
+                this.SetToolbarTitle(NohanaImagePickerController);
             }
             this.CollectionView?.ReloadData();
             this.ScrollCollectionViewToInitialPosition();
@@ -91,12 +95,12 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
 
         public virtual void UpdateTitle()
         {
-            Title = _photoKitAssetList.Title;
+            Title = PhotoKitAssetList.Title;
         }
 
         public virtual void ScrollCollectionView(NSIndexPath indexPath)
         {
-            var count = _photoKitAssetList?.Count ?? 0;
+            var count = PhotoKitAssetList?.Count ?? 0;
             if (count > 0)
             {
                 InvokeOnMainThread(() => {
@@ -109,7 +113,7 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
         {
             if (IsFirstAppearance)
             {
-                var indexPath = NSIndexPath.FromItemSection(this._photoKitAssetList.Count - 1, 0);
+                var indexPath = NSIndexPath.FromItemSection(this.PhotoKitAssetList.Count - 1, 0);
                 this.ScrollCollectionView(indexPath);
                 IsFirstAppearance = false;
             }
@@ -120,24 +124,24 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
         //numberOfItemsInSection
         public override nint GetItemsCount(UICollectionView collectionView, nint section)
         { 
-            return _photoKitAssetList.Count; 
+            return PhotoKitAssetList.Count; 
         }
 
         #endregion
 
         #region UICollectionViewDelegate
-
-        // didSelectItemAt
+        
+        [Export("collectionView:didSelectItemAtIndexPath:")]
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            if (_nohanaImagePickerController != null)
+            if (NohanaImagePickerController != null)
             {
-                _nohanaImagePickerController.pickerDelegate.NahonaImagePickerDidSelect(_nohanaImagePickerController, _photoKitAssetList[(int)indexPath.Item].OriginalAsset);
+                NohanaImagePickerController.pickerDelegate?.NahonaImagePickerDidSelect(NohanaImagePickerController, PhotoKitAssetList[(int)indexPath.Item].OriginalAsset);
             }
 
-            base.ItemSelected(collectionView, indexPath);
+            //base.ItemSelected(collectionView, indexPath);
         } 
-
+        
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
 
@@ -145,26 +149,26 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
             if (cell != null)
             { 
                 cell.Tag = indexPath.Item;
-                cell.Update(_photoKitAssetList[indexPath.Row], _nohanaImagePickerController);
+                cell.Update(PhotoKitAssetList[indexPath.Row], NohanaImagePickerController);
 
                 var imageSize = new CGSize(
                     width: CellSize.Width * UIScreen.MainScreen.Scale,
                     height: CellSize.Width * UIScreen.MainScreen.Scale
                 );
 
-                var asset = _photoKitAssetList[(int)indexPath.Item];
-                asset.Image(imageSize, (imageData) => 
+                var asset = PhotoKitAssetList[(int)indexPath.Item];
+                asset.Image(imageSize, (Action<Common.ImageData>)((imageData) => 
                 {
-                    InvokeOnMainThread(() => 
+                    InvokeOnMainThread((Action)(() => 
                     {
                         if (cell.Tag == indexPath.Item)
                         {
-                            cell.ImageView.Image = imageData.Image;
+                            cell.imageView.Image = imageData.Image;
                         }
-                    });
-                });
+                    }));
+                }));
 
-                return (_nohanaImagePickerController.pickerDelegate.NohanaImagePickerList(_nohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
+                return (NohanaImagePickerController.pickerDelegate?.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
 
             }
  
@@ -196,8 +200,8 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
                      var assetListDetailViewController = segue.DestinationViewController as AssetDetailListViewController;
                      if (assetListDetailViewController != null)
                      {
-                        assetListDetailViewController._photoKitAssetList = _photoKitAssetList;
-                        assetListDetailViewController._nohanaImagePickerController = _nohanaImagePickerController;
+                        assetListDetailViewController.PhotoKitAssetList = PhotoKitAssetList;
+                        assetListDetailViewController.NohanaImagePickerController = NohanaImagePickerController;
                         assetListDetailViewController.CurrentIndexPath = selectedIndex;
                                                                                 
                      }
@@ -209,11 +213,11 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
 
         #region IBAction
 
-        public void DidPushDone(NSObject sender)
+        public void didPushDone(NSObject sender)
         {
-            var pickedPhotoKitAsset = _nohanaImagePickerController.PickedAssetList.OfType<PHAsset>().ToList();
+            var pickedPhotoKitAsset = NohanaImagePickerController.PickedAssetList.OfType<PHAsset>().ToList();
             var phAssetList = pickedPhotoKitAsset.Select(x => (x as PHAsset)).ToList();
-            _nohanaImagePickerController.pickerDelegate.NahonaImagePicker(_nohanaImagePickerController, phAssetList);
+            NohanaImagePickerController.pickerDelegate?.NahonaImagePicker(NohanaImagePickerController, phAssetList);
 
         }
 

@@ -3,14 +3,19 @@ using CoreGraphics;
 using Foundation;
 using Xamarin.NohanaImagePicker.Common;
 using Xamarin.NohanaImagePicker.Photos;
-using Xamarin.NohanaImagePicker.Views;
+using Xamarin.NohanaImagePicker;
 using UIKit;
+using Xamarin.NohanaImagePicker.Extensions;
 
-namespace Xamarin.NohanaImagePicker.ViewControllers
+namespace Xamarin.NohanaImagePicker
 {
-    public class MomentViewController : AssetListViewController, IActivityIndicatable
+    public partial class MomentViewController : AssetListViewController, IActivityIndicatable
     {
         public MomentViewController()
+        {
+        }
+
+        protected internal MomentViewController(IntPtr handle) : base(handle)
         {
         }
 
@@ -24,8 +29,8 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
 
         public override void UpdateTitle()
         {
-            if (_nohanaImagePickerController != null)
-                Title = NSString.LocalizedFormat("albums.moment.title", "NohanaImagePicker", _nohanaImagePickerController.AssetBundle, string.Empty);
+            if (NohanaImagePickerController != null)
+                Title = NSString.LocalizedFormat("albums.moment.title", "NohanaImagePicker", NohanaImagePickerController.AssetBundle, string.Empty);
         }
 
         public override void ScrollCollectionView(NSIndexPath indexPath)
@@ -46,7 +51,7 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
                 var lastSection = MomentAlbumList.Count - 1;
                 if (lastSection >= 0)
                 {
-                    var indexPath = NSIndexPath.FromItemSection(MomentAlbumList[lastSection].Count, lastSection);
+                    var indexPath = NSIndexPath.FromItemSection(MomentAlbumList[lastSection].Count - 1, lastSection);
                     ScrollCollectionView(indexPath);
                     IsFirstAppearance = false;
                 }
@@ -58,7 +63,7 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
         public override nint NumberOfSections(UICollectionView collectionView)
         {
             if (ActivityIndicator != null)
-                UpdateVisibilityOfActivityIndicator(ActivityIndicator);
+                this.UpdateVisibilityOfActivityIndicator(ActivityIndicator);
 
             return MomentAlbumList.Count;
         }
@@ -75,7 +80,7 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
 
-            if (_nohanaImagePickerController == null)
+            if (NohanaImagePickerController == null)
                 throw new Exception("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")");
 
             var cell = collectionView.DequeueReusableCell("AssetCell", indexPath) as AssetCell;
@@ -83,31 +88,30 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
             {
                 var asset = MomentAlbumList[indexPath.Section][indexPath.Row];
                 cell.Tag = indexPath.Item;
-                cell.Update(asset: asset, nohanaImagePickerController: _nohanaImagePickerController);
+                cell.Update(asset: asset, nohanaImagePickerController: NohanaImagePickerController);
 
                 var imageSize = new CGSize(
                     width: CellSize.Width * UIScreen.MainScreen.Scale,
                     height: CellSize.Width * UIScreen.MainScreen.Scale
                 );
                 // TODO: aj
-                asset.Image(imageSize, ImageData =>
+                asset.Image(imageSize, (Action<ImageData>)(ImageData =>
                 {
-                    InvokeOnMainThread(() =>
+                    InvokeOnMainThread((Action)(() =>
                     {
                         if (cell.Tag == indexPath.Item)
                         {
-                            cell.ImageView.Image = ImageData.Image;
+                            cell.imageView.Image = ImageData.Image;
                         }
-                    });
-                });
+                    }));
+                }));
 
-                return (_nohanaImagePickerController.pickerDelegate.NohanaImagePickerList(_nohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
+                return (NohanaImagePickerController.pickerDelegate?.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
             }
 
 
             return base.GetCell(collectionView, indexPath);
         }
-
 
         public override UICollectionReusableView GetViewForSupplementaryElement(UICollectionView collectionView, NSString elementKind, NSIndexPath indexPath)
         {
@@ -117,17 +121,17 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
                 var header = CollectionView.DequeueReusableSupplementaryView(elementKind, "MomentHeader", indexPath) as MomentSectionHeaderView;
                 if (header != null)
                 {
-                    header.LocationLabel.Text = album.Title;
+                    header.locationLabel.Text = album.Title;
                     if (album.Date != null)
                     {
                         var formatter = new NSDateFormatter();
                         formatter.DateStyle = NSDateFormatterStyle.Long;
                         formatter.TimeStyle = NSDateFormatterStyle.None;
-                        header.DateLabel.Text = formatter.StringFor(album.Date);
+                        header.dateLabel.Text = formatter.StringFor(album.Date);
                     }
                     else
                     {
-                        header.DateLabel.Text = string.Empty;
+                        header.dateLabel.Text = string.Empty;
                     }
                 }
                 else
@@ -168,20 +172,15 @@ namespace Xamarin.NohanaImagePicker.ViewControllers
             return IsLoading;
         }
 
-        public void UpdateVisibilityOfActivityIndicator(UIView activityIndicator)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
 
         #region UICollectionViewDelegate
 
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            if (_nohanaImagePickerController != null)
+            if (NohanaImagePickerController != null)
             {
-                _nohanaImagePickerController.pickerDelegate.NahonaImagePickerDidSelect(_nohanaImagePickerController, MomentAlbumList[indexPath.Section][indexPath.Row].OriginalAsset);
+                NohanaImagePickerController.pickerDelegate?.NahonaImagePickerDidSelect(NohanaImagePickerController, MomentAlbumList[indexPath.Section][indexPath.Row].OriginalAsset);
             }
             base.ItemSelected(collectionView, indexPath);
         }

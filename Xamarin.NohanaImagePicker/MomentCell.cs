@@ -1,13 +1,17 @@
 ﻿using System;
-using Xamarin.NohanaImagePicker.ViewControllers;
+using Xamarin.NohanaImagePicker;
 using UIKit;
 using CoreGraphics;
-namespace Xamarin.NohanaImagePicker.Views
+namespace Xamarin.NohanaImagePicker
 {
 	//DONE
-	public class MomentCell : AlbumCell
+	public partial class MomentCell : AlbumCell
     {
         public NohanaImagePickerController.Config? Config;
+
+        public MomentCell(IntPtr handle) : base(handle)
+        {
+        }
 
         public override void Draw(CoreGraphics.CGRect rect)
         {

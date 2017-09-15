@@ -35,8 +35,8 @@ namespace Xamarin.NohanaImagePicker.Photos
                 this.Asset,
                 targetSize,
                 PHImageContentMode.AspectFit,
-                option, 
-                (result, info) => new ImageData { Image = result, Info = info as NSDictionary<NSObject, NSObject> }); 
+                option,
+                (result, info) => handler?.Invoke(new ImageData { Image = result, Info = info as NSDictionary<NSObject, NSObject> })); 
 		}
 
         #endregion
