@@ -134,7 +134,7 @@ namespace Xamarin.NohanaImagePicker
         [Export("collectionView:didSelectItemAtIndexPath:")]
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            if (NohanaImagePickerController != null)
+            if (NohanaImagePickerController != null && PhotoKitAssetList != null)
             {
                 NohanaImagePickerController.PickerDelegate?.NahonaImagePickerDidSelect(NohanaImagePickerController, PhotoKitAssetList[(int)indexPath.Item].OriginalAsset);
             }
@@ -203,7 +203,6 @@ namespace Xamarin.NohanaImagePicker
                         assetListDetailViewController.PhotoKitAssetList = PhotoKitAssetList;
                         assetListDetailViewController.NohanaImagePickerController = NohanaImagePickerController;
                         assetListDetailViewController.CurrentIndexPath = selectedIndex;
-                                                                                
                      }
                 } 
             }
