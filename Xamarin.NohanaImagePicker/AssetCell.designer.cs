@@ -6,15 +6,24 @@
 //
 using Foundation;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace Xamarin.NohanaImagePicker
 {
-	[Register ("AssetCell")]
-	partial class AssetCell
-	{
-		
-		void ReleaseDesignerOutlets ()
-		{
-		}
-	}
+    [Register("AssetCell")]
+    public partial class AssetCell
+    {
+        [Outlet]
+        public UIImageView imageView { get; set; }
+
+        [Outlet]
+        UIButton pickButton { get; set; }
+
+        [Outlet]
+        UIView overlayView { get; set; }
+
+        void ReleaseDesignerOutlets()
+        {
+        }
+    }
 }

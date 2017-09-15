@@ -10,9 +10,14 @@ using System.CodeDom.Compiler;
 namespace Xamarin.NohanaImagePicker
 {
 	[Register ("AlbumCell")]
-	partial class AlbumCell
+	public partial class AlbumCell
 	{
-		
+	    [Outlet]
+        public UIKit.UIImageView thumbnailImageView { get; set; }
+        
+        [Outlet]
+        public UIKit.UILabel titleLabel { get; set; }
+        
 		void ReleaseDesignerOutlets ()
 		{
 		}

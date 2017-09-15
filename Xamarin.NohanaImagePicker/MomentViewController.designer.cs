@@ -10,9 +10,8 @@ using System.CodeDom.Compiler;
 namespace Xamarin.NohanaImagePicker
 {
 	[Register ("MomentViewController")]
-	partial class MomentViewController
-	{
-		
+	public partial class MomentViewController
+	{   
 		void ReleaseDesignerOutlets ()
 		{
 		}

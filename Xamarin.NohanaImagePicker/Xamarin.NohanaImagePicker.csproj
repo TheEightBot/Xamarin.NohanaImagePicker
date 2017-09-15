@@ -54,12 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="AnimationController\" />
     <Folder Include="Common\" />
     <Folder Include="Extensions\" />
     <Folder Include="Photos\" />
-    <Folder Include="ViewControllers\" />
-    <Folder Include="Views\" />
     <Folder Include="Resources\btn_select_l.imageset\" />
     <Folder Include="Resources\btn_select_m.imageset\" />
     <Folder Include="Resources\btn_selected_l.imageset\" />
@@ -121,6 +118,8 @@
     <Compile Include="MomentSectionHeaderView.designer.cs">
       <DependentUpon>MomentSectionHeaderView.cs</DependentUpon>
     </Compile>
+    <Compile Include="AlbumListEmptyIndicator.cs" />
+    <Compile Include="NohanaImagePickerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\btn_select_l.imageset\btn_select_l%402x.png" />

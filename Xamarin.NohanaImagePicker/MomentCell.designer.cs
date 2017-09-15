@@ -10,9 +10,11 @@ using System.CodeDom.Compiler;
 namespace Xamarin.NohanaImagePicker
 {
 	[Register ("MomentCell")]
-	partial class MomentCell
+	public partial class MomentCell
 	{
-		
+		[Outlet]
+        public UIKit.UILabel titleLabel { get; set; }
+        
 		void ReleaseDesignerOutlets ()
 		{
 		}
