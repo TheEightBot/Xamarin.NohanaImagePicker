@@ -13,6 +13,10 @@ namespace Xamarin.NohanaImagePicker
         public NohanaImagePickerController nohanaImagePickerController;
         public IAsset Asset;
 
+        protected internal AssetCell(IntPtr handle) : base(handle)
+        {
+        }
+
         public override void WillMoveToSuperview(UIView newsuper)
         {
             base.WillMoveToSuperview(newsuper);

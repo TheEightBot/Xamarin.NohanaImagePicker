@@ -23,7 +23,11 @@ namespace Xamarin.NohanaImagePicker
         {
             _doubleTapGestureRecognizer.AddTarget(this, new ObjCRuntime.Selector("DidDoubleTap:"));
             _doubleTapGestureRecognizer.NumberOfTapsRequired = 2; 
-		} 
+		}
+
+        protected internal AssetDetailCell(IntPtr handle) : base(handle)
+        {
+        }
 
         public override void WillMoveToSuperview(UIView newsuper)
         {

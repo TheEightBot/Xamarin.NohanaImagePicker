@@ -9,6 +9,10 @@ namespace Xamarin.NohanaImagePicker
     {
         public NohanaImagePickerController.Config? Config;
 
+        public MomentCell(IntPtr handle) : base(handle)
+        {
+        }
+
         public override void Draw(CoreGraphics.CGRect rect)
         {
             base.Draw(rect);

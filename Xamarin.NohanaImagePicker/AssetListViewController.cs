@@ -20,6 +20,10 @@ namespace Xamarin.NohanaImagePicker
         {
         }
 
+        protected internal AssetListViewController(IntPtr handle) : base(handle)
+        {
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
