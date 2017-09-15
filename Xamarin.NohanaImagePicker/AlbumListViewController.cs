@@ -278,6 +278,12 @@ namespace Xamarin.NohanaImagePicker
         {
             return IsLoading;
         }
+        
+        [Action("didPushCancel:")]
+        public void didPushCancel(NSObject sender)
+        {
+            NohanaImagePickerController.PickerDelegate?.NohanaImagePickerDidCancel(NohanaImagePickerController);
+        }
  
     }
 }
