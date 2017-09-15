@@ -45,7 +45,7 @@ namespace Xamarin.NohanaImagePicker.Common
 
 		#region ICollection
 
-		public int Count => _assetList.Count;
+		public int Count => _assetList?.Count ?? 0;
 
 		public bool IsReadOnly => false;
  
