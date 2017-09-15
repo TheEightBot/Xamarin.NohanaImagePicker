@@ -85,7 +85,7 @@ namespace Xamarin.NohanaImagePicker
 
         void DidChangeAssetDetailPage(NSIndexPath indexPath)
         {
-            if (NohanaImagePickerController != null)
+            if (NohanaImagePickerController != null && PhotoKitAssetList != null)
             {
                 var asset = PhotoKitAssetList[(int)indexPath.Item];
                 this.pickButton.Selected = NohanaImagePickerController.PickedAssetList.IsPicked(asset);

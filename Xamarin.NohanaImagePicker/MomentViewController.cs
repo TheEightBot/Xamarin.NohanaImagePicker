@@ -30,7 +30,7 @@ namespace Xamarin.NohanaImagePicker
         public override void UpdateTitle()
         {
             if (NohanaImagePickerController != null)
-                Title = NSString.LocalizedFormat("albums.moment.title", "NohanaImagePicker", NohanaImagePickerController.AssetBundle, string.Empty);
+                Title = NSString.LocalizedFormat("Moment");
         }
 
         public override void ScrollCollectionView(NSIndexPath indexPath)
@@ -42,7 +42,6 @@ namespace Xamarin.NohanaImagePicker
                     CollectionView.ScrollToItem(indexPath, UICollectionViewScrollPosition.Bottom, false);
                 });
         }
-
 
         public override void ScrollCollectionViewToInitialPosition()
         {
@@ -113,6 +112,7 @@ namespace Xamarin.NohanaImagePicker
             return base.GetCell(collectionView, indexPath);
         }
 
+        [Export("collectionView:viewForSupplementaryElementOfKind:atIndexPath:")]
         public override UICollectionReusableView GetViewForSupplementaryElement(UICollectionView collectionView, NSString elementKind, NSIndexPath indexPath)
         {
             if (elementKind == UICollectionElementKindSectionKey.Header)
@@ -133,14 +133,16 @@ namespace Xamarin.NohanaImagePicker
                     {
                         header.dateLabel.Text = string.Empty;
                     }
+                    return header;
                 }
                 else
                 {
                     throw new Exception("failed to create MomentHeader");
                 }
             }
+            return null;
 
-            return base.GetViewForSupplementaryElement(collectionView, elementKind, indexPath);
+            //return base.GetViewForSupplementaryElement(collectionView, elementKind, indexPath);
         }
 
         #endregion 
@@ -197,11 +199,13 @@ namespace Xamarin.NohanaImagePicker
             {
                 var selectedIndexPath = indexPaths[0];
                 var assetListDetailViewController = segue.DestinationViewController as AssetDetailListViewController;
-
+                assetListDetailViewController.PhotoKitAssetList = MomentAlbumList[selectedIndexPath.Section];
+                assetListDetailViewController.NohanaImagePickerController = NohanaImagePickerController;
+                assetListDetailViewController.CurrentIndexPath = selectedIndexPath;
             }
 
 
-            base.PrepareForSegue(segue, sender);
+            //base.PrepareForSegue(segue, sender);
         }
 
         #endregion

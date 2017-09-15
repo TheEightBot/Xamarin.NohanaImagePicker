@@ -241,8 +241,8 @@ namespace Xamarin.NohanaImagePicker
             if (nohanaImagePickerController != null)
             {
                 EmptyIndicator = new AlbumListEmptyIndicator(
-                    message: nohanaImagePickerController.Conf.Strings.AlbumListEmptyMessage ?? NSString.LocalizedFormat("albumlist.empty.message","NohanaImagePicker", nohanaImagePickerController.AssetBundle, string.Empty),
-                    description: nohanaImagePickerController.Conf.Strings.AlbumListEmptyDescription ?? NSString.LocalizedFormat("albumlist.empty.description", "NohanaImagePicker", nohanaImagePickerController.AssetBundle, string.Empty),
+                    message: nohanaImagePickerController.Conf.Strings.AlbumListEmptyMessage ?? NSString.LocalizedFormat("No Photos"),
+                    description: nohanaImagePickerController.Conf.Strings.AlbumListEmptyDescription ?? NSString.LocalizedFormat("Use the camera to take new photos."),
                     frame: frame,
                     config: nohanaImagePickerController.Conf
                 );      
