@@ -6,6 +6,8 @@ using Foundation;
 using Xamarin.NohanaImagePicker.Extensions;
 using CoreGraphics;
 using Xamarin.NohanaImagePicker;
+using Photos;
+using System.Collections.Generic;
 
 namespace Xamarin.NohanaImagePicker
 {
@@ -188,9 +190,38 @@ namespace Xamarin.NohanaImagePicker
             { 
                 case AlbumListViewControllerSectionType.Moment:
                     var momentViewController = segue.DestinationViewController as MomentViewController;
+                    if (momentViewController == null)
+                        return;
+                        
+                    momentViewController.NohanaImagePickerController = NohanaImagePickerController;
+                    momentViewController.MomentAlbumList = new PhotoKitAlbumList(
+                        new List<PHAssetCollectionType> { PHAssetCollectionType.Moment },
+                        new List<PHAssetCollectionSubtype> { PHAssetCollectionSubtype.Any },
+                        NohanaImagePickerController.MediaType,
+                        NohanaImagePickerController.ShouldShowEmptyAlbum,
+                        () =>
+                        {
+                            InvokeOnMainThread(() =>
+                            {
+                                if (momentViewController == null)
+                                    return;
+
+                                momentViewController.IsLoading = false;
+                                momentViewController.CollectionView?.ReloadData();
+                                momentViewController.IsFirstAppearance = true;
+                                momentViewController.ScrollCollectionViewToInitialPosition();
+                            });
+                        });
                     break;
-                case AlbumListViewControllerSectionType.Albums:break;
                     
+                case AlbumListViewControllerSectionType.Albums:
+                    var assetListViewController = segue.DestinationViewController as AssetListViewController;
+                    if (assetListViewController == null)
+                        return;
+                        
+                    assetListViewController.PhotoKitAssetList = PhotoKitAlbumList[TableView.IndexPathForSelectedRow.Row];
+                    assetListViewController.NohanaImagePickerController = NohanaImagePickerController;
+                    break;
             }
 
             base.PrepareForSegue(segue, sender);
