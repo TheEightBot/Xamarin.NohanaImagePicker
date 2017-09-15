@@ -37,7 +37,7 @@ namespace Xamarin.NohanaImagePicker.Common
 
         public int StartIndex { get => 0; }
 
-        public int EndIndex { get => _assetList.Count; }
+        public int EndIndex { get => (_assetList?.Count ?? 0) - 1; }
 
         public Item this[int index] => _assetList[index];
 
@@ -51,37 +51,37 @@ namespace Xamarin.NohanaImagePicker.Common
  
         public void Add(Item item)
         {
-            _assetList.Add(item);
+            _assetList?.Add(item);
         }
 
 		public void Clear()
 		{
-			_assetList.Clear();
+			_assetList?.Clear();
 		}
 
 		public bool Contains(Item item)
 		{
-			return _assetList.Contains(item);
+            return _assetList?.Contains(item) ?? false;
 		}
 
 		public void CopyTo(Item[] array, int arrayIndex)
 		{
-			_assetList.CopyTo(array, arrayIndex);
+			_assetList?.CopyTo(array, arrayIndex);
 		} 
 
 		public bool Remove(Item item)
 		{
-			return _assetList.Remove(item);
+            return _assetList?.Remove(item) ?? false;
 		}
 
 		public IEnumerator<Item> GetEnumerator()
 		{
-			return _assetList.GetEnumerator();
+			return _assetList?.GetEnumerator();
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return _assetList.GetEnumerator();
+			return _assetList?.GetEnumerator();
 		}
 
         #endregion
