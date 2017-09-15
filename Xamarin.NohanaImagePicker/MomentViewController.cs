@@ -24,8 +24,8 @@ namespace Xamarin.NohanaImagePicker
 
         public override void UpdateTitle()
         {
-            if (_nohanaImagePickerController != null)
-                Title = NSString.LocalizedFormat("albums.moment.title", "NohanaImagePicker", _nohanaImagePickerController.AssetBundle, string.Empty);
+            if (NohanaImagePickerController != null)
+                Title = NSString.LocalizedFormat("albums.moment.title", "NohanaImagePicker", NohanaImagePickerController.AssetBundle, string.Empty);
         }
 
         public override void ScrollCollectionView(NSIndexPath indexPath)
@@ -75,7 +75,7 @@ namespace Xamarin.NohanaImagePicker
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
 
-            if (_nohanaImagePickerController == null)
+            if (NohanaImagePickerController == null)
                 throw new Exception("failed to dequeueReusableCellWithIdentifier(\"AssetCell\")");
 
             var cell = collectionView.DequeueReusableCell("AssetCell", indexPath) as AssetCell;
@@ -83,7 +83,7 @@ namespace Xamarin.NohanaImagePicker
             {
                 var asset = MomentAlbumList[indexPath.Section][indexPath.Row];
                 cell.Tag = indexPath.Item;
-                cell.Update(asset: asset, nohanaImagePickerController: _nohanaImagePickerController);
+                cell.Update(asset: asset, nohanaImagePickerController: NohanaImagePickerController);
 
                 var imageSize = new CGSize(
                     width: CellSize.Width * UIScreen.MainScreen.Scale,
@@ -101,7 +101,7 @@ namespace Xamarin.NohanaImagePicker
                     }));
                 }));
 
-                return (_nohanaImagePickerController.pickerDelegate.NohanaImagePickerList(_nohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
+                return (NohanaImagePickerController.pickerDelegate.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
             }
 
 
@@ -179,9 +179,9 @@ namespace Xamarin.NohanaImagePicker
 
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            if (_nohanaImagePickerController != null)
+            if (NohanaImagePickerController != null)
             {
-                _nohanaImagePickerController.pickerDelegate.NahonaImagePickerDidSelect(_nohanaImagePickerController, MomentAlbumList[indexPath.Section][indexPath.Row].OriginalAsset);
+                NohanaImagePickerController.pickerDelegate.NahonaImagePickerDidSelect(NohanaImagePickerController, MomentAlbumList[indexPath.Section][indexPath.Row].OriginalAsset);
             }
             base.ItemSelected(collectionView, indexPath);
         }
