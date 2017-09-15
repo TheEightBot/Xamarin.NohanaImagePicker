@@ -136,7 +136,7 @@ namespace Xamarin.NohanaImagePicker
         {
             if (NohanaImagePickerController != null)
             {
-                NohanaImagePickerController.pickerDelegate?.NahonaImagePickerDidSelect(NohanaImagePickerController, PhotoKitAssetList[(int)indexPath.Item].OriginalAsset);
+                NohanaImagePickerController.PickerDelegate?.NahonaImagePickerDidSelect(NohanaImagePickerController, PhotoKitAssetList[(int)indexPath.Item].OriginalAsset);
             }
 
             //base.ItemSelected(collectionView, indexPath);
@@ -168,7 +168,7 @@ namespace Xamarin.NohanaImagePicker
                     }));
                 }));
 
-                return (NohanaImagePickerController.pickerDelegate?.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
+                return (NohanaImagePickerController.PickerDelegate?.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
 
             }
  
@@ -213,12 +213,11 @@ namespace Xamarin.NohanaImagePicker
 
         #region IBAction
 
+        [Action("didPushDone:")]
         public void didPushDone(NSObject sender)
         {
-            var pickedPhotoKitAsset = NohanaImagePickerController.PickedAssetList.OfType<PHAsset>().ToList();
-            var phAssetList = pickedPhotoKitAsset.Select(x => (x as PHAsset)).ToList();
-            NohanaImagePickerController.pickerDelegate?.NahonaImagePicker(NohanaImagePickerController, phAssetList);
-
+            var phAssetList = NohanaImagePickerController?.PickedAssetList?.Select(x => (x as PHAsset))?.ToList();
+            NohanaImagePickerController.PickerDelegate?.NahonaImagesPicked(NohanaImagePickerController, phAssetList);
         }
 
         #endregion

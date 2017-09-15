@@ -13,7 +13,7 @@ namespace Xamarin.NohanaImagePicker.Common
 		void NohanaImagePickerDidCancel(NohanaImagePickerController picker);
 
 		// func nohanaImagePicker(_ picker: NohanaImagePickerController, didFinishPickingPhotoKitAssets pickedAssts :[PHAsset])
-		void NahonaImagePicker(NohanaImagePickerController picker, List<PHAsset> pickedAssts);
+		void NahonaImagesPicked(NohanaImagePickerController picker, List<PHAsset> pickedAssts);
 
 		//@objc optional func nohanaImagePicker(_ picker: NohanaImagePickerController, willPickPhotoKitAsset asset: PHAsset, pickedAssetsCount: Int) -> Bool
 		bool NahonaImagePickerWillPick(NohanaImagePickerController picker, PHAsset asset, int pickedAssetsCount);

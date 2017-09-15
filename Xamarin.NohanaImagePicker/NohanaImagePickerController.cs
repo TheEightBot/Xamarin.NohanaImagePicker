@@ -19,7 +19,7 @@ namespace Xamarin.NohanaImagePicker
 		public int NumberOfColumnsInPortrait = 4;
         public int NumberOfColumnsInLandscape = 7;
 
-        public INohanaImagePickerControllerDelegate pickerDelegate;
+        public INohanaImagePickerControllerDelegate PickerDelegate;
 
         public bool ShouldShowMoment = true;
 

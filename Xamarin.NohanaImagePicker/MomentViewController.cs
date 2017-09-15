@@ -105,7 +105,7 @@ namespace Xamarin.NohanaImagePicker
                     });
                 });
 
-                return (NohanaImagePickerController.pickerDelegate?.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
+                return (NohanaImagePickerController.PickerDelegate?.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
             }
 
 
@@ -182,7 +182,7 @@ namespace Xamarin.NohanaImagePicker
         {
             if (NohanaImagePickerController != null)
             {
-                NohanaImagePickerController.pickerDelegate?.NahonaImagePickerDidSelect(NohanaImagePickerController, MomentAlbumList[indexPath.Section][indexPath.Row].OriginalAsset);
+                NohanaImagePickerController.PickerDelegate?.NahonaImagePickerDidSelect(NohanaImagePickerController, MomentAlbumList[indexPath.Section][indexPath.Row].OriginalAsset);
             }
             base.ItemSelected(collectionView, indexPath);
         }

@@ -90,7 +90,7 @@ namespace Xamarin.NohanaImagePicker
                 var asset = PhotoKitAssetList[(int)indexPath.Item];
                 this.pickButton.Selected = NohanaImagePickerController.PickedAssetList.IsPicked(asset);
                 this.pickButton.Hidden = !(NohanaImagePickerController.CanPickAsset(asset));
-                NohanaImagePickerController.pickerDelegate?.NohanaImagePickerDidChange(NohanaImagePickerController, this, indexPath, asset.OriginalAsset);
+                NohanaImagePickerController.PickerDelegate?.NohanaImagePickerDidChange(NohanaImagePickerController, this, indexPath, asset.OriginalAsset);
 
             }
         }
@@ -173,7 +173,7 @@ namespace Xamarin.NohanaImagePicker
                     });
                 });
 
-                return (NohanaImagePickerController.pickerDelegate?.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
+                return (NohanaImagePickerController.PickerDelegate?.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
             }
 
             return base.GetCell(collectionView, indexPath);

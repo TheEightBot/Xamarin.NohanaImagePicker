@@ -98,7 +98,7 @@ namespace Xamarin.NohanaImagePicker.Common
             {
                 var canPick =
                     NohanaImagePickerController
-                        .pickerDelegate?.NahonaImagePickerWillPick(NohanaImagePickerController, (asset as PhotoKitAsset).OriginalAsset, assetsCountBeforePicking) ?? true;
+                        .PickerDelegate?.NahonaImagePickerWillPick(NohanaImagePickerController, (asset as PhotoKitAsset).OriginalAsset, assetsCountBeforePicking) ?? true;
 
                 if (!canPick) return false;
             }
@@ -114,7 +114,7 @@ namespace Xamarin.NohanaImagePicker.Common
             if (asset is PhotoKitAsset)
             {
                 var originalAsset = (asset as PhotoKitAsset).OriginalAsset;
-                NohanaImagePickerController.pickerDelegate?.NahonaImagePickerDidPick(NohanaImagePickerController, originalAsset, assetsCountBeforePicking);
+                NohanaImagePickerController.PickerDelegate?.NahonaImagePickerDidPick(NohanaImagePickerController, originalAsset, assetsCountBeforePicking);
                 var info = new NSMutableDictionary();
                 info.SetValueForKey(originalAsset, (Foundation.NSString)NotificationInfo.Asset.PhotoKit.DidPickUserInfoKeyAsset);
                 info.SetValueForKey((NSNumber)assetsCountBeforePicking, (Foundation.NSString)NotificationInfo.Asset.PhotoKit.DidPickUserInfoKeyPickedAssetsCount);
@@ -137,7 +137,7 @@ namespace Xamarin.NohanaImagePicker.Common
             var assetsCountBeforeDropping = this.Count();
             if (asset is PhotoKitAsset)
             {
-                var canDrop = NohanaImagePickerController.pickerDelegate?.NohanaImagePickerWillDrop(NohanaImagePickerController, (asset as PhotoKitAsset).OriginalAsset, assetsCountBeforeDropping) ?? true;
+                var canDrop = NohanaImagePickerController.PickerDelegate?.NohanaImagePickerWillDrop(NohanaImagePickerController, (asset as PhotoKitAsset).OriginalAsset, assetsCountBeforeDropping) ?? true;
                 if (!canDrop) return false;
 
                 _assetList = _assetList.Where(x => x.Identifier != asset.Identifier).ToList();
