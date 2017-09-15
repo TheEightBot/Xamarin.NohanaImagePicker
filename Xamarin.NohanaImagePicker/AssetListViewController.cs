@@ -7,6 +7,7 @@ using CoreGraphics;
 using Xamarin.NohanaImagePicker;
 using Photos;
 using System.Linq;
+using Xamarin.NohanaImagePicker.Common;
 
 namespace Xamarin.NohanaImagePicker
 {
@@ -215,7 +216,11 @@ namespace Xamarin.NohanaImagePicker
         [Action("didPushDone:")]
         public void didPushDone(NSObject sender)
         {
-            var phAssetList = NohanaImagePickerController?.PickedAssetList?.Select(x => (x as PHAsset))?.ToList();
+            var phAssetList = 
+                NohanaImagePickerController?.PickedAssetList?
+                    .Where(x => x is PhotoKitAsset)?
+                    .Select(x => (x as PhotoKitAsset).OriginalAsset)?
+                    .ToList();
             NohanaImagePickerController.PickerDelegate?.NahonaImagesPicked(NohanaImagePickerController, phAssetList);
         }
 
