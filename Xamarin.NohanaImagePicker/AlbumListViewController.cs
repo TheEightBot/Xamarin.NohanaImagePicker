@@ -46,7 +46,7 @@ namespace Xamarin.NohanaImagePicker
             if (nohanaImagePickerController != null)
             {
                 View.BackgroundColor = nohanaImagePickerController.Conf.Color.Background ?? UIColor.White;
-                Title = nohanaImagePickerController.Conf.Strings.AlbumListTitle ?? NSString.LocalizedFormat("albumlist.title", "NohanaImagePicker", nohanaImagePickerController, string.Empty);
+                Title = nohanaImagePickerController.Conf.Strings.AlbumListTitle ?? NSString.LocalizedFormat("Photos", "NohanaImagePicker", nohanaImagePickerController, string.Empty);
                 this.SetUpToolbarItems();
                 NavigationController.SetToolbarHidden(nohanaImagePickerController.ToolbarHidden, false); 
             }
@@ -134,7 +134,7 @@ namespace Xamarin.NohanaImagePicker
                     if (NohanaImagePickerController != null)
                     {
                         cell.Config = NohanaImagePickerController.Conf;
-                        cell.titleLabel.Text = NohanaImagePickerController.Conf.Strings.AlbumListMomentTitle ?? NSString.LocalizedFormat("albumlist.moment.title", "NohanaImagePicker", NohanaImagePickerController.AssetBundle, string.Empty); 
+                        cell.titleLabel.Text = NohanaImagePickerController.Conf.Strings.AlbumListMomentTitle ?? NSString.LocalizedFormat("Moment", "NohanaImagePicker", NohanaImagePickerController.AssetBundle, string.Empty); 
                     }
                     return cell;
                 case AlbumListViewControllerSectionType.Albums:

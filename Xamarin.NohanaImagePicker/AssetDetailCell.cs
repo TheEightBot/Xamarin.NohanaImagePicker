@@ -9,38 +9,32 @@ namespace Xamarin.NohanaImagePicker
     // DONE
     public partial class AssetDetailCell : UICollectionViewCell, IUIScrollViewDelegate
     {
-        public UIScrollView ScrollView { get; set; }
-
-        public UIImageView ImageView { get; set; }
-
-        public NSLayoutConstraint ImageViewHeightContraint { get; set; }
-
-        public NSLayoutConstraint ImageViewWidthConstraint { get; set; }
-
         UITapGestureRecognizer _doubleTapGestureRecognizer = new UITapGestureRecognizer(); 
 
         public AssetDetailCell(NSCoder aDecoder) : base(aDecoder)
         {
-            _doubleTapGestureRecognizer.AddTarget(this, new ObjCRuntime.Selector("DidDoubleTap:"));
+            _doubleTapGestureRecognizer.AddTarget((x) => DidDoubleTap(x as UITapGestureRecognizer));
             _doubleTapGestureRecognizer.NumberOfTapsRequired = 2; 
 		}
 
         protected internal AssetDetailCell(IntPtr handle) : base(handle)
         {
+            _doubleTapGestureRecognizer.AddTarget((x) => DidDoubleTap(x as UITapGestureRecognizer));
+            _doubleTapGestureRecognizer.NumberOfTapsRequired = 2; 
         }
 
         public override void WillMoveToSuperview(UIView newsuper)
         {
             base.WillMoveToSuperview(newsuper);
-            ScrollView.RemoveGestureRecognizer(_doubleTapGestureRecognizer);
-            ScrollView.AddGestureRecognizer(_doubleTapGestureRecognizer);
+            scrollView.RemoveGestureRecognizer(_doubleTapGestureRecognizer);
+            scrollView.AddGestureRecognizer(_doubleTapGestureRecognizer);
         }
 
         ~AssetDetailCell()
         { 
-            ScrollView.RemoveGestureRecognizer(_doubleTapGestureRecognizer); 
+            scrollView.RemoveGestureRecognizer(_doubleTapGestureRecognizer); 
 
-            ScrollView.Dispose();
+            scrollView.Dispose();
             _doubleTapGestureRecognizer.Dispose();
         }
 
@@ -49,7 +43,7 @@ namespace Xamarin.NohanaImagePicker
         [Export("viewForZoomingInScrollView:")]
         public UIView ViewForZoomingInScrollView(UIScrollView scrollView)
         {
-            return ImageView;
+            return imageView;
         } 
 
         #endregion
@@ -58,23 +52,23 @@ namespace Xamarin.NohanaImagePicker
 
         void DidDoubleTap(UITapGestureRecognizer sender)
         {
-            if (ScrollView.ZoomScale < ScrollView.MaximumZoomScale)
+            if (scrollView.ZoomScale < scrollView.MaximumZoomScale)
             {
-                var center = sender.LocationInView(ImageView);
-                ScrollView.ZoomToRect(ZoomRect(center), animated: true);
+                var center = sender.LocationInView(imageView);
+                scrollView.ZoomToRect(ZoomRect(center), animated: true);
             }
             else
             {
                 var defaultScale = (nfloat)1;
-                ScrollView.SetZoomScale(defaultScale, animated: true);
+                scrollView.SetZoomScale(defaultScale, animated: true);
             }
         }
 
         CGRect ZoomRect(CGPoint center)
         {
             var size = new CGSize(
-                ScrollView.Frame.Size.Width / ScrollView.MaximumZoomScale, 
-                ScrollView.Frame.Size.Height / ScrollView.MaximumZoomScale
+                scrollView.Frame.Size.Width / scrollView.MaximumZoomScale, 
+                scrollView.Frame.Size.Height / scrollView.MaximumZoomScale
             );
 
             var point = new CGPoint(

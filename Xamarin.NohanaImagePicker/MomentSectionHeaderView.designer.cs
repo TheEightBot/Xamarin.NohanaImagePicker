@@ -6,13 +6,19 @@
 //
 using Foundation;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace Xamarin.NohanaImagePicker
 {
 	[Register ("MomentSectionHeaderView")]
 	partial class MomentSectionHeaderView
 	{
-		
+        [Outlet]
+        public UILabel dateLabel { get; set; }
+        
+        [Outlet]
+        public UILabel locationLabel { get; set; }
+        
 		void ReleaseDesignerOutlets ()
 		{
 		}

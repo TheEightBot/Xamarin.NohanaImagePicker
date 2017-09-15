@@ -139,9 +139,6 @@
                                                 <constraint firstAttribute="width" constant="44" id="7Yd-sj-A9c"/>
                                                 <constraint firstAttribute="height" constant="44" id="Biw-rC-p8x"/>
                                             </constraints>
-                                            <connections>
-                                                <action selector="didPushPickButton:" destination="gNu-ad-t1d" eventType="touchUpInside" id="gAj-yS-7xL"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                 </view>
@@ -259,9 +256,6 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="c4C-Sf-Krj">
                                 <rect key="frame" x="276" y="8" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="didPushPickButton:" destination="r7t-t8-AuE" eventType="touchUpInside" id="vWF-yZ-1NC"/>
-                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -348,9 +342,6 @@
                                                 <constraint firstAttribute="width" constant="44" id="BX8-gP-86t"/>
                                                 <constraint firstAttribute="height" constant="44" id="RUG-gG-ieX"/>
                                             </constraints>
-                                            <connections>
-                                                <action selector="didPushPickButton:" destination="hn9-bM-eId" eventType="touchUpInside" id="g70-dv-o5C"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                 </view>
@@ -442,7 +433,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="sZ8-aF-u4m"/>
         <segue reference="Bed-w3-B1Q"/>
-        <segue reference="tQI-o9-h2w"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -57,10 +57,6 @@
     <Folder Include="Common\" />
     <Folder Include="Extensions\" />
     <Folder Include="Photos\" />
-    <Folder Include="Resources\btn_select_l.imageset\" />
-    <Folder Include="Resources\btn_select_m.imageset\" />
-    <Folder Include="Resources\btn_selected_l.imageset\" />
-    <Folder Include="Resources\btn_selected_m.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -122,19 +118,15 @@
     <Compile Include="NohanaImagePickerController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\btn_select_l.imageset\btn_select_l%402x.png" />
-    <BundleResource Include="Resources\btn_select_l.imageset\btn_select_l%403x.png" />
-    <BundleResource Include="Resources\btn_select_l.imageset\Contents.json" />
-    <BundleResource Include="Resources\btn_select_m.imageset\btn_select_m%402x.png" />
-    <BundleResource Include="Resources\btn_select_m.imageset\btn_select_m%403x.png" />
-    <BundleResource Include="Resources\btn_select_m.imageset\Contents.json" />
-    <BundleResource Include="Resources\btn_selected_l.imageset\btn_selected_l%402x.png" />
-    <BundleResource Include="Resources\btn_selected_l.imageset\btn_selected_l%403x.png" />
-    <BundleResource Include="Resources\btn_selected_l.imageset\Contents.json" />
-    <BundleResource Include="Resources\btn_selected_m.imageset\btn_selected_m%402x.png" />
-    <BundleResource Include="Resources\btn_selected_m.imageset\btn_selected_m%403x.png" />
-    <BundleResource Include="Resources\btn_selected_m.imageset\Contents.json" />
     <BundleResource Include="Resources\NohanaImagePicker.strings" />
+    <BundleResource Include="Resources\btn_select_l%402x.png" />
+    <BundleResource Include="Resources\btn_select_l%403x.png" />
+    <BundleResource Include="Resources\btn_select_m%402x.png" />
+    <BundleResource Include="Resources\btn_select_m%403x.png" />
+    <BundleResource Include="Resources\btn_selected_l%402x.png" />
+    <BundleResource Include="Resources\btn_selected_l%403x.png" />
+    <BundleResource Include="Resources\btn_selected_m%402x.png" />
+    <BundleResource Include="Resources\btn_selected_m%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

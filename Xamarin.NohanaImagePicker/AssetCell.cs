@@ -10,7 +10,7 @@ namespace Xamarin.NohanaImagePicker
 	public partial class AssetCell : UICollectionViewCell
     {
 
-        public NohanaImagePickerController nohanaImagePickerController;
+        public NohanaImagePickerController NohanaImagePickerController;
         public IAsset Asset;
 
         protected internal AssetCell(IntPtr handle) : base(handle)
@@ -20,27 +20,30 @@ namespace Xamarin.NohanaImagePicker
         public override void WillMoveToSuperview(UIView newsuper)
         {
             base.WillMoveToSuperview(newsuper);
-            if (nohanaImagePickerController != null)
+            if (NohanaImagePickerController != null)
             {
-                var droppedImage = nohanaImagePickerController.Conf.Image.DroppedSmall ?? UIImage.FromBundle("btn_select_m", nohanaImagePickerController.AssetBundle, null);
-                var pickedImage = nohanaImagePickerController.Conf.Image.DroppedSmall ?? UIImage.FromBundle("btn_selected_m", nohanaImagePickerController.AssetBundle, null);
+                var droppedImage = NohanaImagePickerController.Conf.Image.DroppedSmall ?? UIImage.FromBundle("btn_select_m");
+                var pickedImage = NohanaImagePickerController.Conf.Image.DroppedSmall ?? UIImage.FromBundle("btn_selected_m", NohanaImagePickerController.AssetBundle, null);
 
                 pickButton.SetImage(droppedImage, new UIControlState());
                 pickButton.SetImage(pickedImage, UIControlState.Selected); 
+                
+                pickButton.TouchUpInside -= PickButton_TouchUpInside;
+                pickButton.TouchUpInside += PickButton_TouchUpInside;
             }
         }
 
-        public void DidPushPickButton(UIButton sender)
+        public void DidPushPickButton()
         { 
             if (pickButton.Selected)
             {
-                if (nohanaImagePickerController.PickedAssetList.Drop(Asset)) 
+                if (NohanaImagePickerController.PickedAssetList.Drop(Asset)) 
                     pickButton.Selected = false; 
             }
 			else
 			{
-				if (nohanaImagePickerController.PickedAssetList.Pick(Asset)) 
-					pickButton.Selected = false; 
+				if (NohanaImagePickerController.PickedAssetList.Pick(Asset)) 
+					pickButton.Selected = true; 
 			}
             this.overlayView.Hidden = !pickButton.Selected;
         }
@@ -48,11 +51,16 @@ namespace Xamarin.NohanaImagePicker
         public void Update(IAsset asset, NohanaImagePickerController nohanaImagePickerController)
         {
             this.Asset = asset;
-            this.nohanaImagePickerController = nohanaImagePickerController;
+            this.NohanaImagePickerController = nohanaImagePickerController;
             this.pickButton.Selected = nohanaImagePickerController.PickedAssetList.IsPicked(asset);
             this.overlayView.Hidden = !pickButton.Selected;
             this.pickButton.Hidden = !(nohanaImagePickerController.CanPickAsset(asset));
 
+        }
+
+        void PickButton_TouchUpInside(object sender, EventArgs e)
+        {
+            DidPushPickButton();
         }
     }
 }

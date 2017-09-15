@@ -71,7 +71,7 @@ namespace Xamarin.NohanaImagePicker.Photos
                 }
 
                 if (this._assetCollectionTypes.Count() == 1 && this._assetCollectionTypes.Contains(PHAssetCollectionType.Moment))
-                    this._albumList = tmpAlbumList.OrderByDescending(x => x.Date).ToList();
+                    this._albumList = tmpAlbumList.OrderByDescending(x => x.Date.SecondsSinceReferenceDate).ToList();
                 else
                     this._albumList = tmpAlbumList;
 

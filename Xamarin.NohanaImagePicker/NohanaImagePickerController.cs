@@ -42,7 +42,7 @@ namespace Xamarin.NohanaImagePicker
                 if (_assetBundle == null)
                 {
                     var bundle = NSBundle.MainBundle;
-                    var path = bundle.PathForResource("NohanaImagePicker", ofType: "bundle");
+                    var path = bundle.BundlePath;
                     if (path != null)
                         _assetBundle = new NSBundle(path);
                 } 

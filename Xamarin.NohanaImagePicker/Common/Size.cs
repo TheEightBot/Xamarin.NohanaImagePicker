@@ -79,10 +79,10 @@ namespace Xamarin.NohanaImagePicker.Common
 
         public static CGRect ContractingAnimationFromCellRect(AssetDetailListViewController fromVC, AssetDetailCell fromCell, CGSize contractingImageSize)
         { 
-            var rect = AVFoundation.AVUtilities.WithAspectRatio(fromCell.ImageView.Frame, contractingImageSize);
+            var rect = AVFoundation.AVUtilities.WithAspectRatio(fromCell.imageView.Frame, contractingImageSize);
             rect.Y += Size.AppBarHeight(fromVC);
-            rect.X -= fromCell.ScrollView.ContentOffset.X;
-            rect.Y -= fromCell.ScrollView.ContentOffset.Y;
+            rect.X -= fromCell.scrollView.ContentOffset.X;
+            rect.Y -= fromCell.scrollView.ContentOffset.Y;
             return rect;
         }
     }

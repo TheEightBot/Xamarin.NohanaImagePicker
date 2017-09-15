@@ -130,18 +130,18 @@ namespace Xamarin.NohanaImagePicker
         #endregion
 
         #region UICollectionViewDelegate
-
-        // didSelectItemAt
+        
+        [Export("collectionView:didSelectItemAtIndexPath:")]
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
             if (NohanaImagePickerController != null)
             {
-                NohanaImagePickerController.pickerDelegate.NahonaImagePickerDidSelect(NohanaImagePickerController, PhotoKitAssetList[(int)indexPath.Item].OriginalAsset);
+                NohanaImagePickerController.pickerDelegate?.NahonaImagePickerDidSelect(NohanaImagePickerController, PhotoKitAssetList[(int)indexPath.Item].OriginalAsset);
             }
 
-            base.ItemSelected(collectionView, indexPath);
+            //base.ItemSelected(collectionView, indexPath);
         } 
-
+        
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
 
@@ -168,7 +168,7 @@ namespace Xamarin.NohanaImagePicker
                     }));
                 }));
 
-                return (NohanaImagePickerController.pickerDelegate.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
+                return (NohanaImagePickerController.pickerDelegate?.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
 
             }
  
@@ -213,11 +213,11 @@ namespace Xamarin.NohanaImagePicker
 
         #region IBAction
 
-        public void DidPushDone(NSObject sender)
+        public void didPushDone(NSObject sender)
         {
             var pickedPhotoKitAsset = NohanaImagePickerController.PickedAssetList.OfType<PHAsset>().ToList();
             var phAssetList = pickedPhotoKitAsset.Select(x => (x as PHAsset)).ToList();
-            NohanaImagePickerController.pickerDelegate.NahonaImagePicker(NohanaImagePickerController, phAssetList);
+            NohanaImagePickerController.pickerDelegate?.NahonaImagePicker(NohanaImagePickerController, phAssetList);
 
         }
 

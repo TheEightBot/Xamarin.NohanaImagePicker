@@ -16,9 +16,9 @@ namespace Xamarin.NohanaImagePicker.Common
     {
         public PickedAssetList()
         {
-        } 
+        }
 
-        List<Item> _assetList;
+        List<Item> _assetList = new List<Item>();
         public NohanaImagePickerController NohanaImagePickerController;
 
         #region ItemList
@@ -90,7 +90,7 @@ namespace Xamarin.NohanaImagePicker.Common
 
         public bool Pick(IAsset asset)
         {
-            if (!IsPicked(asset))
+            if (IsPicked(asset))
                 return false;
 
             var assetsCountBeforePicking = this.Count;
@@ -98,7 +98,7 @@ namespace Xamarin.NohanaImagePicker.Common
             {
                 var canPick =
                     NohanaImagePickerController
-                        .pickerDelegate.NahonaImagePickerWillPick(NohanaImagePickerController, (asset as PhotoKitAsset).OriginalAsset, assetsCountBeforePicking);
+                        .pickerDelegate?.NahonaImagePickerWillPick(NohanaImagePickerController, (asset as PhotoKitAsset).OriginalAsset, assetsCountBeforePicking) ?? true;
 
                 if (!canPick) return false;
             }
@@ -108,14 +108,14 @@ namespace Xamarin.NohanaImagePicker.Common
             {
                 return false;
             }
-            _assetList.Append(asset);
+            _assetList.Add(asset);
 
             var assetsCountAfterPicker = this.Count;
             if (asset is PhotoKitAsset)
             {
                 var originalAsset = (asset as PhotoKitAsset).OriginalAsset;
-                NohanaImagePickerController.pickerDelegate.NahonaImagePickerDidPick(NohanaImagePickerController, originalAsset, assetsCountBeforePicking);
-                var info = new NSDictionary<NSString, NSObject>();
+                NohanaImagePickerController.pickerDelegate?.NahonaImagePickerDidPick(NohanaImagePickerController, originalAsset, assetsCountBeforePicking);
+                var info = new NSMutableDictionary();
                 info.SetValueForKey(originalAsset, (Foundation.NSString)NotificationInfo.Asset.PhotoKit.DidPickUserInfoKeyAsset);
                 info.SetValueForKey((NSNumber)assetsCountBeforePicking, (Foundation.NSString)NotificationInfo.Asset.PhotoKit.DidPickUserInfoKeyPickedAssetsCount);
 
@@ -137,7 +137,7 @@ namespace Xamarin.NohanaImagePicker.Common
             var assetsCountBeforeDropping = this.Count();
             if (asset is PhotoKitAsset)
             {
-                var canDrop = NohanaImagePickerController.pickerDelegate.NohanaImagePickerWillDrop(NohanaImagePickerController, (asset as PhotoKitAsset).OriginalAsset, assetsCountBeforeDropping);
+                var canDrop = NohanaImagePickerController.pickerDelegate?.NohanaImagePickerWillDrop(NohanaImagePickerController, (asset as PhotoKitAsset).OriginalAsset, assetsCountBeforeDropping) ?? true;
                 if (!canDrop) return false;
 
                 _assetList = _assetList.Where(x => x.Identifier != asset.Identifier).ToList();
@@ -150,7 +150,7 @@ namespace Xamarin.NohanaImagePicker.Common
                         //TODO: uncomment after event is implemented 
                         //NohanaImagePickerController.NahonaImagePickerDidDrop(NohanaImagePickerController, originalAsset, assetsCountAfterDropping);
 
-                        var info = new NSDictionary<NSString, NSObject>();
+                        var info = new NSMutableDictionary();
                         info.SetValueForKey(originalAsset, (Foundation.NSString)NotificationInfo.Asset.PhotoKit.DidDropUserInfoKeyAsset);
                         info.SetValueForKey((NSNumber)assetsCountAfterDropping, (Foundation.NSString)NotificationInfo.Asset.PhotoKit.DidDropUserInfoKeyPickedAssetsCount);
 

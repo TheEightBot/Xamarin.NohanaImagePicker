@@ -5,12 +5,17 @@ using Xamarin.NohanaImagePicker.Common;
 using Xamarin.NohanaImagePicker.Photos;
 using Xamarin.NohanaImagePicker;
 using UIKit;
+using Xamarin.NohanaImagePicker.Extensions;
 
 namespace Xamarin.NohanaImagePicker
 {
     public partial class MomentViewController : AssetListViewController, IActivityIndicatable
     {
         public MomentViewController()
+        {
+        }
+
+        protected internal MomentViewController(IntPtr handle) : base(handle)
         {
         }
 
@@ -46,7 +51,7 @@ namespace Xamarin.NohanaImagePicker
                 var lastSection = MomentAlbumList.Count - 1;
                 if (lastSection >= 0)
                 {
-                    var indexPath = NSIndexPath.FromItemSection(MomentAlbumList[lastSection].Count, lastSection);
+                    var indexPath = NSIndexPath.FromItemSection(MomentAlbumList[lastSection].Count - 1, lastSection);
                     ScrollCollectionView(indexPath);
                     IsFirstAppearance = false;
                 }
@@ -58,7 +63,7 @@ namespace Xamarin.NohanaImagePicker
         public override nint NumberOfSections(UICollectionView collectionView)
         {
             if (ActivityIndicator != null)
-                UpdateVisibilityOfActivityIndicator(ActivityIndicator);
+                this.UpdateVisibilityOfActivityIndicator(ActivityIndicator);
 
             return MomentAlbumList.Count;
         }
@@ -101,13 +106,12 @@ namespace Xamarin.NohanaImagePicker
                     }));
                 }));
 
-                return (NohanaImagePickerController.pickerDelegate.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
+                return (NohanaImagePickerController.pickerDelegate?.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
             }
 
 
             return base.GetCell(collectionView, indexPath);
         }
-
 
         public override UICollectionReusableView GetViewForSupplementaryElement(UICollectionView collectionView, NSString elementKind, NSIndexPath indexPath)
         {
@@ -117,17 +121,17 @@ namespace Xamarin.NohanaImagePicker
                 var header = CollectionView.DequeueReusableSupplementaryView(elementKind, "MomentHeader", indexPath) as MomentSectionHeaderView;
                 if (header != null)
                 {
-                    header.LocationLabel.Text = album.Title;
+                    header.locationLabel.Text = album.Title;
                     if (album.Date != null)
                     {
                         var formatter = new NSDateFormatter();
                         formatter.DateStyle = NSDateFormatterStyle.Long;
                         formatter.TimeStyle = NSDateFormatterStyle.None;
-                        header.DateLabel.Text = formatter.StringFor(album.Date);
+                        header.dateLabel.Text = formatter.StringFor(album.Date);
                     }
                     else
                     {
-                        header.DateLabel.Text = string.Empty;
+                        header.dateLabel.Text = string.Empty;
                     }
                 }
                 else
@@ -168,11 +172,6 @@ namespace Xamarin.NohanaImagePicker
             return IsLoading;
         }
 
-        public void UpdateVisibilityOfActivityIndicator(UIView activityIndicator)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
 
         #region UICollectionViewDelegate
@@ -181,7 +180,7 @@ namespace Xamarin.NohanaImagePicker
         {
             if (NohanaImagePickerController != null)
             {
-                NohanaImagePickerController.pickerDelegate.NahonaImagePickerDidSelect(NohanaImagePickerController, MomentAlbumList[indexPath.Section][indexPath.Row].OriginalAsset);
+                NohanaImagePickerController.pickerDelegate?.NahonaImagePickerDidSelect(NohanaImagePickerController, MomentAlbumList[indexPath.Section][indexPath.Row].OriginalAsset);
             }
             base.ItemSelected(collectionView, indexPath);
         }
