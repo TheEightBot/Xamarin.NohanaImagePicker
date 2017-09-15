@@ -125,7 +125,6 @@ namespace Xamarin.NohanaImagePicker
                                 shouldShowEmptyAlbum: ShouldShowEmptyAlbum,
                                 handler: () => 
                                 {
-                                    // TODO:
                                     InvokeOnMainThread(() =>
                                     {
                                         albumListViewController.IsLoading = false;

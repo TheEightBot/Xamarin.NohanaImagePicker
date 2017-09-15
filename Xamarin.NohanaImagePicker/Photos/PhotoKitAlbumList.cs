@@ -18,7 +18,6 @@ namespace Xamarin.NohanaImagePicker.Photos
         private MediaType _mediaType { get; set; }
         private bool _shouldShowEmptyAlbum;
 
-        // TODO: need help with Action
         public PhotoKitAlbumList(List<PHAssetCollectionType> assetCollectionTypes, List<PHAssetCollectionSubtype> assetCollectionSubtypes, MediaType mediaType, bool shouldShowEmptyAlbum, Action handler)
         {
             _assetCollectionTypes = assetCollectionTypes;

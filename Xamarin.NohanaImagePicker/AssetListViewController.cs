@@ -72,7 +72,7 @@ namespace Xamarin.NohanaImagePicker
         public override void ViewWillTransitionToSize(CGSize toSize, IUIViewControllerTransitionCoordinator coordinator)
         {
             base.ViewWillTransitionToSize(toSize, coordinator);
-            // TODO: check
+            
             coordinator.AnimateAlongsideTransition((_) => 
             {
                 if (this.NavigationController?.VisibleViewController != this)

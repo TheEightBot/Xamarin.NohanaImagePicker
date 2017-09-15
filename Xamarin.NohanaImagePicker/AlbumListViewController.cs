@@ -152,8 +152,7 @@ namespace Xamarin.NohanaImagePicker
                     if (albumCount > 0)
                     {
                         var lastAsset = albumList[albumCount - 1];
-                        
-                        // TODO: aj check
+                       
                         lastAsset.Image(imageSize, (imageData) =>
                         {
                             InvokeOnMainThread(() =>

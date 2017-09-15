@@ -159,7 +159,7 @@ namespace Xamarin.NohanaImagePicker
                 );
                 var asset = PhotoKitAssetList[(int)indexPath.Item];
                 cell.Tag = indexPath.Item;
-                // TODO: aj
+                
                 asset.Image(imageSize, imageData =>
                 {
                     InvokeOnMainThread(() =>

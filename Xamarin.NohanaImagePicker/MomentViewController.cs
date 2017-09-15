@@ -93,17 +93,17 @@ namespace Xamarin.NohanaImagePicker
                     width: CellSize.Width * UIScreen.MainScreen.Scale,
                     height: CellSize.Width * UIScreen.MainScreen.Scale
                 );
-                // TODO: aj
-                asset.Image(imageSize, (Action<ImageData>)(ImageData =>
+                
+                asset.Image(imageSize, ImageData =>
                 {
-                    InvokeOnMainThread((Action)(() =>
+                    InvokeOnMainThread(() =>
                     {
                         if (cell.Tag == indexPath.Item)
                         {
                             cell.imageView.Image = ImageData.Image;
                         }
-                    }));
-                }));
+                    });
+                });
 
                 return (NohanaImagePickerController.pickerDelegate?.NohanaImagePickerList(NohanaImagePickerController, this, cell, indexPath, asset.OriginalAsset)) ?? cell;
             }
