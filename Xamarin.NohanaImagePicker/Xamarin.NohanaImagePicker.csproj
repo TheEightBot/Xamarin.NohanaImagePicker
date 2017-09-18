@@ -74,10 +74,6 @@
     <Compile Include="Photos\PhotoKitAlbumList.cs" />
     <Compile Include="Photos\PhotoKitAsset.cs" />
     <Compile Include="Photos\PhotoKitAssetList.cs" />
-    <Compile Include="AlbumListViewController.cs" />
-    <Compile Include="AlbumListViewController.designer.cs">
-      <DependentUpon>AlbumListViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="AlbumCell.cs" />
     <Compile Include="AlbumCell.designer.cs">
       <DependentUpon>AlbumCell.cs</DependentUpon>
@@ -116,6 +112,10 @@
     </Compile>
     <Compile Include="AlbumListEmptyIndicator.cs" />
     <Compile Include="NohanaImagePickerController.cs" />
+    <Compile Include="Common\AlbumListViewController.cs" />
+    <Compile Include="Common\AlbumListViewController.designer.cs">
+      <DependentUpon>AlbumListViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\NohanaImagePicker.strings" />

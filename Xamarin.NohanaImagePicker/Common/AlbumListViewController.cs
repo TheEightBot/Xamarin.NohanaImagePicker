@@ -52,6 +52,7 @@ namespace Xamarin.NohanaImagePicker
             }
             SetUpEmptyIndicator();
             SetUpActivityIndicator();
+            this.TableView.SeparatorColor = UIColor.LightGray;
         }
 
         ~AlbumListViewController()

@@ -1,6 +1,5 @@
 ﻿using System;
-using Foundation;
-using Newtonsoft.Json;
+using Foundation; 
 using UIKit; 
 using CoreGraphics;
 
