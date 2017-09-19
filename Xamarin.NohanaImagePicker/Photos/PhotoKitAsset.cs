@@ -7,7 +7,6 @@ using Photos;
 
 namespace Xamarin.NohanaImagePicker.Photos
 {
-    // DONE
     public class PhotoKitAsset : NSObject, IAsset
     { 
         public PHAsset Asset { get; set; }

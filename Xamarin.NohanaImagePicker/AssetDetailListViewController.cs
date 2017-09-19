@@ -10,20 +10,11 @@ namespace Xamarin.NohanaImagePicker
 {
     public partial class AssetDetailListViewController : AssetListViewController, IUICollectionViewDelegateFlowLayout, IUIScrollViewDelegate
     {
-        //var currentIndexPath: IndexPath = IndexPath()
-        //{
-        //	willSet {
-        //		if currentIndexPath != newValue {
-        //			didChangeAssetDetailPage(newValue)
-
-        //	}
-        //	}
-        //}  ^^^^^^ this is swift, is below converted right
         
         NSIndexPath _currentIndexPath;
         public NSIndexPath CurrentIndexPath { 
             get
-            { 
+            {  
                 return _currentIndexPath; 
             }
             set 
@@ -73,8 +64,7 @@ namespace Xamarin.NohanaImagePicker
                 this.View.InvalidateIntrinsicContentSize();
                 this.CollectionView?.ReloadData();
                 this.ScrollCollectionView(indexPath);
-                this.View.Hidden = false;
-
+                this.View.Hidden = false; 
             });
         }
 
@@ -91,7 +81,6 @@ namespace Xamarin.NohanaImagePicker
                 this.pickButton.Selected = NohanaImagePickerController.PickedAssetList.IsPicked(asset);
                 this.pickButton.Hidden = !(NohanaImagePickerController.CanPickAsset(asset));
                 NohanaImagePickerController.PickerDelegate?.NohanaImagePickerDidChange(NohanaImagePickerController, this, indexPath, asset.OriginalAsset);
-
             }
         }
 
@@ -110,7 +99,7 @@ namespace Xamarin.NohanaImagePicker
 
         public override void ScrollCollectionViewToInitialPosition()
         {
-            if (IsFirstAppearance) return;
+            if (!IsFirstAppearance) return;
 
             var indexPath = NSIndexPath.FromItemSection(CurrentIndexPath.Item, 0);
             ScrollCollectionView(indexPath);
@@ -147,7 +136,7 @@ namespace Xamarin.NohanaImagePicker
             if (NohanaImagePickerController == null)
                 throw new Exception("failed to dequeueReusableCellWithIdentifier(\"AssetDetailCell\")");
 
-            var cell = collectionView.DequeueReusableCell("AssetDetailCell", indexPath) as AssetDetailCell;
+            var cell = collectionView.DequeueReusableCell("AssetDetailCell", CurrentIndexPath) as AssetDetailCell;
             if (cell != null)
             {
                 cell.scrollView.ZoomScale = 1;
@@ -197,8 +186,8 @@ namespace Xamarin.NohanaImagePicker
                     CurrentIndexPath = NSIndexPath.FromRowSection(CollectionView.NumberOfItemsInSection(0) - 1, CurrentIndexPath.Section);
                 }
                 else
-                {
-                    CurrentIndexPath = NSIndexPath.FromRowSection((int)row, CurrentIndexPath.Section);
+                { 
+                    CurrentIndexPath = NSIndexPath.FromRowSection(2, CurrentIndexPath.Section);
                 }
             }
         }
