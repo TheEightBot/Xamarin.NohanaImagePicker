@@ -10,8 +10,7 @@ using static Xamarin.NohanaImagePicker.Common.NotificationInfo;
 using Item = Xamarin.NohanaImagePicker.Common.IAsset;
 
 namespace Xamarin.NohanaImagePicker.Common
-{
-    //TODO: pick drop
+{ 
     public class PickedAssetList : Common.IItemList, ICollection<Item>
     {
         public PickedAssetList()

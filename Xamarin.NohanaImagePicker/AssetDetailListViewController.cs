@@ -10,7 +10,8 @@ namespace Xamarin.NohanaImagePicker
 {
     public partial class AssetDetailListViewController : AssetListViewController, IUICollectionViewDelegateFlowLayout, IUIScrollViewDelegate
     {
-        
+        public bool IsFinishedLoading { get; set; }
+
         NSIndexPath _currentIndexPath;
         public NSIndexPath CurrentIndexPath { 
             get
@@ -54,6 +55,13 @@ namespace Xamarin.NohanaImagePicker
             }
         }
 
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+            IsFinishedLoading = true;
+        }
+ 
+
         public override void ViewWillTransitionToSize(CGSize toSize, IUIViewControllerTransitionCoordinator coordinator)
         {
             base.ViewWillTransitionToSize(toSize, coordinator);
@@ -65,7 +73,7 @@ namespace Xamarin.NohanaImagePicker
                 this.CollectionView?.ReloadData();
                 this.ScrollCollectionView(indexPath);
                 this.View.Hidden = false; 
-            });
+            }); 
         }
 
         public override void UpdateTitle()
@@ -174,7 +182,7 @@ namespace Xamarin.NohanaImagePicker
 
         public override void Scrolled(UIScrollView scrollView)
         {
-            if (CollectionView != null)
+            if (CollectionView != null && IsFinishedLoading)
             {
                 var row = (int)(CollectionView.ContentOffset.X + CellSize.Width * 0.5) / CellSize.Width;
                 if (row < 0)
@@ -190,6 +198,8 @@ namespace Xamarin.NohanaImagePicker
                     CurrentIndexPath = NSIndexPath.FromRowSection(2, CurrentIndexPath.Section);
                 }
             }
+
+
         }
 
 		#endregion
@@ -206,6 +216,7 @@ namespace Xamarin.NohanaImagePicker
         
         void PickButton_TouchUpInside(object sender, EventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("fires");
             DidPushPickButton();
         }
 	}

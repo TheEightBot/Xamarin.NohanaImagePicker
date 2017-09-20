@@ -60,6 +60,7 @@ namespace Xamarin.NohanaImagePicker
 
         void PickButton_TouchUpInside(object sender, EventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("fires");
             DidPushPickButton();
         }
     }

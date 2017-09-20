@@ -139,8 +139,6 @@ namespace Xamarin.NohanaImagePicker
             {
                 NohanaImagePickerController.PickerDelegate?.NahonaImagePickerDidSelect(NohanaImagePickerController, PhotoKitAssetList[(int)indexPath.Item].OriginalAsset);
             }
-
-            //base.ItemSelected(collectionView, indexPath);
         } 
         
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
