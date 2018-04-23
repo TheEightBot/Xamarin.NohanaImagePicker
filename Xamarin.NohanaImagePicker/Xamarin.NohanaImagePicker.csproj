@@ -21,6 +21,7 @@
     <PackageTags>xamarin, xamarin.ios, image, image picker</PackageTags>
     <Title>Xamarin Nohana Image Picker</Title>
     <Description>Xamarin.iOS Port of the Nohana Image Picker for iOS</Description>
+    <PackageIconUrl>https://github.com/TheEightBot/Xamarin.NohanaImagePicker/raw/master/NohanaImagePicker.Xamarin.png</PackageIconUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
